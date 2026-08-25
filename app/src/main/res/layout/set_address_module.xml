@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/hy_lay_dp_32"
+    android:paddingTop="@dimen/hy_lay_dp_16"
+    android:paddingEnd="@dimen/hy_lay_dp_32"
+    android:paddingBottom="@dimen/hy_lay_dp_16">
+
+
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_100"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/li_back"
+            android:layout_width="@dimen/li_return_image"
+            android:layout_height="@dimen/li_return_image"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:src="@drawable/icon_return"
+            android:tint="#000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="安装区域"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_30" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/hy_lay_dp_20"
+        android:layout_marginLeft="@dimen/hy_lay_dp_17"
+        android:layout_marginRight="@dimen/hy_lay_dp_17"
+        android:paddingTop="@dimen/hy_lay_dp_20"
+        android:paddingLeft="@dimen/hy_lay_dp_55"
+        android:paddingRight="@dimen/hy_lay_dp_55"
+        android:paddingBottom="@dimen/hy_lay_dp_20"
+
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="安装区域设定"
+            android:textSize="@dimen/hy_font_sp_18"
+            android:textColor="#3D3D3D"
+            />
+
+
+
+
+        <com.hy.greenbuilding.ui.widget.CustomLinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_45"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/sp_province"
+                android:layout_width="@dimen/hy_lay_dp_150"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/hy_lay_dp_16"
+                android:background="@drawable/city_spinner_bg"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center" />
+
+            <Spinner
+                android:id="@+id/sp_city"
+                android:gravity="center"
+                android:layout_width="@dimen/hy_lay_dp_150"
+                android:layout_height="@dimen/hy_lay_dp_37"
+                android:layout_marginLeft="@dimen/hy_lay_dp_77"
+                android:background="@drawable/city_spinner_bg"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center" />
+
+
+        </com.hy.greenbuilding.ui.widget.CustomLinearLayout>
+
+
+        <LinearLayout
+            android:background="@drawable/main_setting_item_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/hy_lay_dp_16"
+            android:paddingEnd="@dimen/hy_lay_dp_16"
+            android:layout_marginTop="@dimen/hy_lay_dp_60"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hy_lay_dp_46"
+                android:singleLine="true"
+                android:textColor="#3D3D3D"
+                android:background="@null"
+                android:textSize="@dimen/hy_font_sp_18"
+                android:paddingTop="@dimen/hy_lay_dp_0"
+                android:paddingBottom="@dimen/hy_lay_dp_0"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

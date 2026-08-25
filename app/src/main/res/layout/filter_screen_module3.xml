@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/in_filter_screen_module3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/hy_lay_dp_17"
+    android:layout_marginTop="@dimen/hy_lay_dp_20"
+    android:layout_marginRight="@dimen/hy_lay_dp_17"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/hy_lay_dp_55"
+    android:paddingTop="@dimen/hy_lay_dp_20"
+    android:paddingRight="@dimen/hy_lay_dp_55"
+    android:paddingBottom="@dimen/hy_lay_dp_20"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_8"
+            android:text="@string/pressure_filter_screen"
+            android:textColor="#3D3D3D"
+            android:textSize="@dimen/hy_font_sp_18" />
+
+        <CheckBox
+            android:id="@+id/new_wind_pressure_cb"
+            style="@style/mycheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_56"
+            android:text="新风"
+            android:textColor="#343A38"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <CheckBox
+            android:id="@+id/exhaust_pressure_cb"
+            style="@style/mycheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_56"
+            android:text="排风"
+            android:textColor="#343A38"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <CheckBox
+            android:id="@+id/circle1_pressure_cb"
+            style="@style/mycheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_56"
+            android:text="内循环1"
+            android:textColor="#343A38"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <CheckBox
+            android:id="@+id/circle2_pressure_cb"
+            style="@style/mycheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_56"
+            android:text="内循环2"
+            android:textColor="#343A38"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_24"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fresh_air"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <EditText
+                android:id="@+id/pressure_freshAir"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="Pa"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/circle_wind1"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <EditText
+                android:id="@+id/pressure_circle1"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="Pa"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_16"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exhaust"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <EditText
+                android:id="@+id/pressure_exhaust"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="Pa"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/circle_wind2"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <EditText
+                android:id="@+id/pressure_circle2"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="Pa"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="@dimen/hy_lay_dp_29"
+        android:text="滤网压差值"
+        android:textColor="#3D3D3D"
+        android:textSize="@dimen/hy_font_sp_18" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_16"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fresh_air"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <TextView
+                android:id="@+id/new_wind_pressure_value"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_15"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="小时"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_50"
+                android:text="@string/circle_wind1"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <TextView
+                android:id="@+id/circle1_pressure_value"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_15"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="小时"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_18"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exhaust"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <TextView
+                android:id="@+id/exhaust_pressure_value"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_15"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="小时"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_50"
+                android:text="@string/circle_wind2"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+
+            <TextView
+                android:id="@+id/circle2_pressure_value"
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_31"
+                android:layout_marginStart="@dimen/hy_lay_dp_15"
+                android:layout_marginLeft="@dimen/hy_lay_dp_11"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hy_lay_dp_3"
+                android:text="小时"
+                android:textColor="#3D3D3D"
+                android:textSize="@dimen/hy_font_sp_12" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

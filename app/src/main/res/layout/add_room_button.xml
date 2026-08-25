@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/hy_lay_dp_234"
+    android:id="@+id/ll_add_container"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/room_item_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_height="@dimen/hy_lay_dp_219">
+
+    <TextView
+        android:background="@drawable/circle_green_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="@dimen/hy_font_sp_20"
+        android:textColor="#333333"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_15"
+        android:text="添加房间"
+        android:textSize="@dimen/hy_font_sp_14"
+        android:textColor="#3D3D3D"/>
+</LinearLayout>

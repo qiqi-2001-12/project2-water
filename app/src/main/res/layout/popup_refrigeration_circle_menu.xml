@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RadioButton
+        android:button="@null"
+        android:id="@+id/bt_circle_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_btn_switch_bg3"
+        android:gravity="center"
+        android:text="@string/text_small_wind"
+        android:textColor="@drawable/selector_btn_text_color"
+        android:paddingTop="@dimen/hy_lay_dp_35"
+        android:paddingBottom="@dimen/hy_lay_dp_26"
+        android:textSize="@dimen/hy_font_sp_24" />
+
+    <RadioButton
+        android:button="@null"
+        android:id="@+id/bt_circle_middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_btn_switch_bg3"
+        android:gravity="center"
+        android:text="@string/text_middle_wind"
+        android:textColor="@drawable/selector_btn_text_color"
+        android:paddingTop="@dimen/hy_lay_dp_35"
+        android:paddingBottom="@dimen/hy_lay_dp_26"
+        android:textSize="@dimen/hy_font_sp_24" />
+
+    <RadioButton
+        android:button="@null"
+        android:id="@+id/bt_circle_high"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_btn_switch_bg3"
+        android:gravity="center"
+        android:text="@string/text_high_wind"
+        android:textColor="@drawable/selector_btn_text_color"
+        android:paddingTop="@dimen/hy_lay_dp_35"
+        android:paddingBottom="@dimen/hy_lay_dp_26"
+        android:textSize="@dimen/hy_font_sp_24" />
+
+    <RadioButton
+        android:button="@null"
+        android:id="@+id/bt_circle_no"
+        android:paddingTop="@dimen/hy_lay_dp_35"
+        android:paddingBottom="@dimen/hy_lay_dp_26"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_btn_switch_bg3"
+        android:gravity="center"
+        android:text="关"
+        android:textColor="@drawable/selector_btn_text_color"
+        android:textSize="@dimen/hy_font_sp_24" />
+</RadioGroup>

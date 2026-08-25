@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/hy_lay_dp_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_56"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dc_fan_icon"
+            android:tint="#000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_8"
+            android:text="@string/dc_fan_text"
+            android:theme="@style/baseTextTheme" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_16"
+        android:orientation="horizontal"
+        android:padding="@dimen/hy_lay_dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dcFan_speed_percent"
+            android:theme="@style/baseTextTheme1" />
+
+        <EditText
+            android:text="30"
+            android:hint="30"
+            android:textColor="#000000"
+            android:id="@+id/et_dcFan"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:gravity="center"
+            android:inputType="number"
+            android:theme="@style/myEditText"
+            android:backgroundTint="#000000"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/hy_lay_dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dcFan_speed_resp"
+            android:theme="@style/baseTextTheme1" />
+
+        <TextView
+            android:id="@+id/dcSpeed_response"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:gravity="center"
+            android:background="@drawable/rounded_border_bg"
+            android:theme="@style/baseTextTheme1" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/bt_setDCFan"
+            android:layout_width="@dimen/main_bt_width"
+            android:layout_height="@dimen/main_bt_height2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/hy_lay_dp_30"
+            android:background="@drawable/button_style_bg"
+            android:text="@string/setting_complete"
+            android:theme="@style/baseTextTheme"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+</LinearLayout>

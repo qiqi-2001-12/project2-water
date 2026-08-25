@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:right="30dp"> <!-- 增加右侧间距，避免与图标重叠 -->
+        <shape>
+            <corners android:radius="@dimen/hy_lay_dp_32" />
+            <solid android:color="#AE8567"></solid>
+            <!-- 移除这里的 padding，改为在 item 标签上设置，或者保持其中一个 -->
+        </shape>
+    </item>
+    <item android:gravity="end|center_vertical" android:width="@dimen/hy_lay_dp_16" android:height="@dimen/hy_lay_dp_16"> <!-- 箭头图标将显示在最右侧 -->
+        <bitmap
+            android:src="@drawable/spinner_icon1" />
+    </item>
+</layer-list>

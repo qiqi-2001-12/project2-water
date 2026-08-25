@@ -1,0 +1,11 @@
+<TextView
+    android:id="@+id/spinner_textView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/themeColor"
+    android:gravity="center"
+    android:padding="15dp"
+    android:textColor="@color/baseTextColor"
+    android:textSize="@dimen/hy_font_sp_20">
+</TextView>

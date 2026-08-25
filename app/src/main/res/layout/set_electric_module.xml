@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:orientation="vertical"
+    android:padding="@dimen/hy_lay_dp_30">
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_100"
+        android:orientation="horizontal">
+        <ImageView
+            android:tint="#000"
+            android:layout_centerVertical="true"
+            android:id="@+id/li_back"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_return" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电量显示"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_30" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_setting_item_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/hy_lay_dp_16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hy_lay_dp_56"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/set_dianliang_icon"
+                android:tint="#000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:text="@string/electric_show_title"
+                android:theme="@style/baseTextTheme" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hy_lay_dp_80"
+            android:layout_marginTop="@dimen/hy_lay_dp_36"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/electric_total"
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:id="@+id/total_electric_value"
+                android:layout_width="@dimen/main_tv_width1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_16"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:singleLine="true"
+                android:padding="@dimen/hy_lay_dp_8"
+                android:textColor="#000"
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:gravity="center"
+                android:text="KWH"
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_36"
+                android:text="@string/power_title"
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:id="@+id/power_waste_value"
+                android:layout_width="@dimen/main_tv_width1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_16"
+                android:background="@drawable/rounded_border_bg"
+                android:singleLine="true"
+                android:gravity="center"
+                android:padding="@dimen/hy_lay_dp_8"
+                android:textColor="#000"
+
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:gravity="center"
+                android:text="KW"
+                android:theme="@style/baseTextTheme1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hy_lay_dp_80"
+            android:layout_marginTop="@dimen/hy_lay_dp_32"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/electric_current_title"
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:id="@+id/electric_value"
+                android:layout_width="@dimen/main_tv_width1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_32"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:padding="@dimen/hy_lay_dp_8"
+                android:singleLine="true"
+                android:textColor="#000"
+
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:gravity="center"
+                android:text="A"
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_56"
+                android:text="@string/voltage_current_title"
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:id="@+id/voltage_value"
+                android:layout_width="@dimen/main_tv_width1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_30"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:padding="@dimen/hy_lay_dp_8"
+                android:singleLine="true"
+                android:textColor="#000"
+
+                android:theme="@style/baseTextTheme1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/hy_lay_dp_8"
+                android:gravity="center"
+                android:text="V"
+                android:theme="@style/baseTextTheme1" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:textColor="#fff"
+                    android:id="@+id/bt_reset_electric"
+                    android:layout_width="@dimen/main_bt_width"
+                    android:layout_height="@dimen/main_bt_height2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/hy_lay_dp_16"
+                    android:background="@drawable/button_style_bg"
+                    android:text="@string/reset_electric_button"
+                    android:theme="@style/baseTextTheme" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

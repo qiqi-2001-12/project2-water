@@ -1,0 +1,174 @@
+<resources>
+    <string name="app_name">生态之家</string>
+    <string name="text_small_wind">低速</string>
+    <string name="text_middle_wind">中速</string>
+    <string name="text_high_wind">高速</string>
+
+    <string name="indoor_test">室内机运行检测</string>
+    <string name="air_mode">空调模式</string>
+    <string name="in_wind_speed">内机运行风速</string>
+    <string name="set_wind_speed">设定风速</string>
+    <string name="NTC">NTC传感器</string>
+    <string name="indoor_coil">室内盘管</string>
+
+    <string name="function_test">能力测试</string>
+    <string name="force_flu">强制收氟</string>
+    <string name="force_defrost">强制除霜</string>
+    <string name="test_environment">测试环境</string>
+    <string name="close_test">关设定</string>
+
+    <string name="open_mode">开/关机模式</string>
+    <string name="switch_status_text">开关状态</string>
+    <string name="press_frequency">压机频率</string>
+    <string name="set_temp">设定温度</string>
+    <string name="indoor_temp">室内温度</string>
+    <string name="cold_temp">冷凝温度</string>
+    <string name="indoor_temp1">室内热交温度</string>
+    <string name="electric_text">外机电流</string>
+    <string name="voltage_text">母线电压</string>
+    <string name="module_temp">模块温度</string>
+    <string name="defrost_signal">除霜信号</string>
+    <string name="outdoor_temp">室外温度</string>
+    <string name="outdoor_temp1">室外热交温度</string>
+
+    <string name="fan_speed">外风机转速</string>
+    <string name="pv_power">PV功率</string>
+    <string name="device_power">整机功率</string>
+    <string name="in_out_ntc">内热交探头</string>
+
+    <string name="exhaust_temp">排气温度</string>
+    <string name="reset_temp">回气温度</string>
+
+    <string name="main_expansion1">主膨胀阀开度</string>
+    <string name="aux_expansion">辅膨胀阀开度</string>
+    <string name="main_expansion">电子膨胀阀</string>
+    <string name="outdoor_fun_speed">室外机转速</string>
+    <string name="fault_code">故障代码</string>
+
+    <string name="system_setting">系统设置</string>
+    <string name="reset_info">功能说明：</string>
+    <string name="reset_info1">使用本界面时，务必 \n 仔细阅读下列文字</string>
+    <string name="reset_info2">1.上电前拨码选择“出厂配置”模式后进入本界面.</string>
+    <string name="reset_info3">2.仅针对EBM恒风量风机（RS通讯方式.）</string>
+    <string name="reset_info4">3.实时监控风机配置过程，可通过反馈信息进行该部分故障处理.</string>
+    <string name="reset_info5">4.在“总线上设置时”，要注意必须使线上只有一台风机设备.</string>
+    <string name="reset_info6">5.风机的“开”和“关”按钮是单独控制此台风机用来测试风量是否设置成功，
+        如果反馈风量和设置风量显示数据一致，则设置成功.</string>
+    <string name="fan_reset_title">出厂配置</string>
+    <string name="freshAir_device">新风机</string>
+    <string name="exhaust_device">排风机</string>
+    <string name="circle1_device">循环风1</string>
+    <string name="circle2_device">循环风2</string>
+    <string name="set_fan_value">设置风量</string>
+    <string name="set_fan_address">设置地址</string>
+    <string name="resp_fan_value">反馈风量</string>
+    <string name="resp_fan_address">地址反馈</string>
+    <string name="freshAir_open">新风单开</string>
+    <string name="freshAir_close">新风单关</string>
+    <string name="exhaust_open">排风单开</string>
+    <string name="exhaust_close">排风单关</string>
+    <string name="circle1_open">循环风1单开</string>
+    <string name="circle1_close">循环风1单关</string>
+    <string name="circle2_open">循环风2单开</string>
+    <string name="circle2_close">循环风2单关</string>
+    <string name="search_address_button">搜索地址</string>
+
+    <string name="fan_test_title">风机调试页</string>
+    <string name="fanTest_type">Type：</string>
+    <string name="fanTest_vref">vref:</string>
+    <string name="fanTest_deviceType">DeviceType:</string>
+    <string name="fanTest_error">Error:</string>
+    <string name="fanTest_value">风量</string>
+    <string name="fanTest_value_small">低速</string>
+    <string name="fanTest_value_middle">中速</string>
+    <string name="fanTest_value_high">高速</string>
+    <string name="setting_CO2">CO2设置</string>
+    <string name="setting_pm">PM2.5设置</string>
+
+
+    <string name="anti_freezing_title">防冻保护单元</string>
+    <string name="anti_freezing_info">注：写入PID参数时，将默认写入全部PID设置参数(包括设置温度、
+         P值、I值、D值、pid周期和pid最小输出</string>
+    <string name="anti_freezing_info1">录入设置温度时按照10倍乘输入，如设置5.1 \u2103，输入51</string>
+    <string name="anti_freezing_info2">P、I、D值输入范围0-65535</string>
+    <string name="anti_freezing_info3">如2s,输入200,以此类推</string>
+    <string name="anti_freezing_info4">输入范围0-100</string>
+    <string name="set_pid_temp1">设置温度1</string>
+    <string name="set_pid_temp2">设置温度2</string>
+    <string name="pid_out_temp">室外机室外温度</string>
+    <string name="pid_ntc_temp">实际温度</string>
+    <string name="pid_ptc_temp">EEPTC_SetTe</string>
+    <string name="pid_param_set">PID参数设置</string>
+    <string name="p_value">P值</string>
+    <string name="i_value">I值</string>
+    <string name="d_value">D值</string>
+    <string name="pid_cycle">PID周期</string>
+    <string name="pid_min_input">PID最小输出</string>
+    <string name="pid_write_param">写入参数</string>
+
+    <string name="change_filterScreen_info">请更换滤网!</string>
+    <string name="reset">重置</string>
+    <string name="time_hour">小时</string>
+    <string name="fresh_air">新风</string>
+    <string name="exhaust">排风</string>
+    <string name="circle_wind1">内循环1</string>
+    <string name="circle_wind2">内循环2</string>
+    <string name="change_filter_screen">滤网更换(使用周期设置)</string>
+    <string name="pressure_filter_screen">滤网压差设置</string>
+    <string name="setting_complete">设置完成</string>
+    <string name="setting_txt">设置</string>
+    <string name="app_version_title">安卓屏程序版本</string>
+    <string name="main_control_version">主控机程序版本</string>
+    <string name="low_power_mode">低功耗模式</string>
+    <string name="care_mode">关怀模式</string>
+    <string name="electric_show_title">能耗</string>
+    <string name="electric_total">总电量</string>
+    <string name="power_title">功耗</string>
+    <string name="electric_current_title">电流</string>
+    <string name="voltage_current_title">电压</string>
+    <string name="reset_electric_button">重置电量</string>
+
+    <string name="set_humidity_title">湿度设定</string>
+    <string name="set_humidity_title1">湿度回差</string>
+    <string name="set_dehumidify_title">除湿设定</string>
+    <string name="set_humidify_title">加湿设定</string>
+    <string name="control_humidity">控湿</string>
+    <string name="humidity_control_title">湿控</string>
+    <string name="humidity_company">%</string>
+    <string name="temp_company"> \u2103</string>
+    <string name="control_temp">控温</string>
+    <string name="control_temp_min">温度下限</string>
+    <string name="control_temp_max">温度上限</string>
+    <string name="set_temp_button">温度设置</string>
+    <string name="dc_fan_text">DC风机</string>
+    <string name="dcFan_speed_percent">百分比转速</string>
+    <string name="dcFan_speed_resp">反馈转速</string>
+
+    <string name="set_timing_long">开启时长</string>
+    <string name="set_timing_day">天</string>
+    <string name="set_timing_current1">时段一&#160;&#160;</string>
+    <string name="set_timing_current2">时段二&#160;&#160;</string>
+    <string name="set_timing_current3">时段三&#160;&#160;</string>
+    <string name="set_timing_hour">时</string>
+    <string name="set_timing_button">定时设置</string>
+
+    <string name="device_qrCode">设备二维码</string>
+
+    <string name="out_device_error">外机故障</string>
+    <string name="room_notify_error">检测器通讯故障</string>
+    <string name="ntc_error">NTC检测故障</string>
+
+    <string name="set_success">设置成功</string>
+    <string name="set_fail">设置失败</string>
+    <string name="set_format_error">格式错误</string>
+
+    <string name="device_locked">设备已锁定</string>
+    <string name="server_not_permission">您的服务已暂停,请联系工作人员开通</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+</resources>

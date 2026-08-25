@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/tv_left_title"
+        android:textColor="#000"
+        android:textSize="@dimen/hy_font_sp_30" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="670dp"
+        android:background="@drawable/home_tq_bg"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="开关模式"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/pv_switchStatus"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="设定模式"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/pv_setMode"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:textColor="@color/baseTextColor">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="设定温度"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/pv_setTempLeft"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:textColor="@color/baseTextColor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="室内温度"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:id="@+id/pv_inTempLeft"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/NTC"
+            android:visibility="invisible"
+            android:theme="@style/baseTextTheme"
+            android:textColor="#000"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="回风探头"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:id="@+id/pv_ntc1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="内热交探头"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:id="@+id/pv_ntc2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="定频工况"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/pv_frequency_Condition"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="能力测试工况"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/pv_testCondition"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:textColor="@color/baseTextColor">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="调节膨胀阀开度"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/pv_expansion_valve"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_style_bg"
+            android:text="测试工况"
+            android:id="@+id/bt_pvTemp_test"
+            android:theme="@style/baseTextTheme1"
+            android:textColor="#fff"/>
+
+    </LinearLayout>
+</LinearLayout>

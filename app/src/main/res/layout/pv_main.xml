@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <include layout="@layout/pv_left"
+        android:layout_width="0dp"
+        android:layout_height="756dp"
+        android:layout_margin="15dp"
+        android:layout_weight="2"
+        android:background="@drawable/main_left_bg"
+        android:gravity="center"
+        android:orientation="vertical"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="15dp"
+        android:layout_weight="5"
+        android:background="@drawable/main_left_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center|left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/li_back"
+                android:layout_width="@dimen/li_return_image"
+                android:layout_height="@dimen/li_return_image"
+                android:padding="@dimen/hy_lay_dp_15"
+                android:gravity="center"
+                android:tint="#000"
+                android:src="@drawable/icon_return" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="280dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="运行监控"
+                android:textColor="#000"
+                android:textSize="@dimen/hy_font_sp_30" />
+
+        </LinearLayout>
+
+        <include layout="@layout/pv_right" />
+
+        <LinearLayout
+            android:layout_width="865dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/home_tq_bg"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:text="故障代码1"
+                        android:theme="@style/baseTextTheme1" />
+
+                    <GridView
+                        android:id="@+id/rl_pv_error1"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="5dp"
+                        android:numColumns="2"
+                        android:verticalSpacing="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:text="故障代码0"
+                        android:theme="@style/baseTextTheme1" />
+
+                    <GridView
+                        android:id="@+id/rl_pv_error0"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="5dp"
+                        android:numColumns="2"
+                        android:verticalSpacing="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="NTC故障"
+                android:theme="@style/baseTextTheme1" />
+
+            <GridView
+                android:id="@+id/rl_ntc_error"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:numColumns="3"
+                android:verticalSpacing="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 按下图片-->
+    <item          android:drawable="@drawable/btm_set_on_ex"    android:state_pressed="true" />
+    <!-- 默认图片-->
+    <item          android:drawable="@drawable/btm_set_off_ex" />
+
+</selector>

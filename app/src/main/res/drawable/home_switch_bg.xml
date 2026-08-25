@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="false">
+        <shape android:shape="oval">
+            <solid android:color="#ffffff" />
+            <size android:width="@dimen/hy_lay_dp_45" android:height="@dimen/hy_lay_dp_45"/>
+        </shape>
+    </item>
+    <item android:state_selected="true" android:drawable="@drawable/circle_ae8567"/>
+</selector>

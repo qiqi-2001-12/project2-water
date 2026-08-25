@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KTFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/kt_ctrl" />
+
+        <ImageView
+            android:id="@+id/img_kt_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="279dp"
+            android:layout_marginLeft="31dp"
+            android:src="@drawable/kt_auto_off" />
+
+        <ImageView
+        android:id="@+id/img_kt_cold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="278dp"
+        android:layout_marginLeft="83dp"
+        android:src="@drawable/kt_cold_off" />
+
+        <ImageView
+            android:id="@+id/img_kt_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="277dp"
+            android:layout_marginLeft="143dp"
+            android:src="@drawable/kt_hot_off" />
+        <ImageView
+            android:id="@+id/img_kt_chushi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="280dp"
+            android:layout_marginLeft="207dp"
+            android:src="@drawable/kt_chushi_off" />
+        <ImageView
+            android:id="@+id/img_kt_md_fan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="280dp"
+            android:layout_marginLeft="259dp"
+            android:src="@drawable/kt_md_fan_off" />
+        <ImageView
+            android:id="@+id/img_kt_fan_lr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="280dp"
+            android:layout_marginLeft="318dp"
+            android:src="@drawable/kt_fan_lr_off" />
+        <ImageView
+            android:id="@+id/img_kt_fan_ud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="283dp"
+            android:layout_marginLeft="372dp"
+            android:src="@drawable/kt_fan_ud_off" />
+        <ImageView
+            android:id="@+id/img_kt_fan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="279dp"
+            android:layout_marginLeft="429dp"
+            android:src="@drawable/kt_fan_1" />
+
+        <ImageView
+            android:id="@+id/img_kt_power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="421dp"
+            android:src="@drawable/kt_power_off" />
+
+        <TextView
+            android:id="@+id/text_kt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFFFFFF"
+            android:textSize="28dp"
+            android:text="卧室-空调" />
+
+        <ImageView
+            android:id="@+id/img_kt_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/kt_kt_choose" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12dp"
+            android:text="选择家电" />
+
+        <ImageView
+            android:id="@+id/img_kt_temp_left"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="212dp"
+            android:layout_marginLeft="120dp"
+            android:src="@drawable/kt_temp_left" />
+
+        <ImageView
+            android:id="@+id/img_kt_temp_right"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="212dp"
+            android:layout_marginLeft="330dp"
+            android:src="@drawable/kt_temp_right" />
+
+        <TextView
+            android:id="@+id/text_kt_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="190dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFFFFFF"
+            android:textSize="48dp"
+            android:text="28" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="270dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18dp"
+            android:text="℃" />
+
+    </RelativeLayout>
+
+</FrameLayout>

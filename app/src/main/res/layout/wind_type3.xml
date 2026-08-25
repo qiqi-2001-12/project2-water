@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fanTest_type"
+                android:textColor="#000000"
+                android:textSize="@dimen/hy_font_sp_24" />
+
+            <RadioGroup
+                android:id="@+id/radiogroup_wind3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_wind3_rs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RS485"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <RadioButton
+                    android:id="@+id/rb_wind3_pwm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="PWM"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <RadioButton
+                    android:id="@+id/rb_wind3_dc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="DC"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/circle1_device"
+                android:layout_marginStart="10dp"
+                android:theme="@style/baseTextTheme" />
+
+            <LinearLayout
+                android:layout_width="@dimen/fanTest_item_width"
+                android:layout_height="@dimen/fanTest_item_height"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:orientation="vertical"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fanTest_vref"
+                        android:theme="@style/baseTextTheme" />
+
+                    <TextView
+                        android:id="@+id/tv_vref_wind3"
+                        android:layout_width="@dimen/main_tv_width"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/edittext_frequency_bg"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fanTest_deviceType"
+                        android:theme="@style/baseTextTheme" />
+
+                    <TextView
+                        android:id="@+id/tv_type_wind3"
+                        android:layout_width="@dimen/main_tv_width"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/edittext_frequency_bg"
+                        android:enabled="false"
+                        android:theme="@style/baseTextTheme" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fanTest_error"
+                        android:theme="@style/baseTextTheme" />
+
+                    <TextView
+                        android:id="@+id/tv_error_wind3"
+                        android:layout_width="@dimen/main_tv_width"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/edittext_frequency_bg"
+                        android:enabled="false"
+                        android:theme="@style/baseTextTheme" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="100dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_wind3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="风量"
+                    android:theme="@style/baseTextTheme" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/fanTest_item_width"
+                android:layout_height="@dimen/fanTest_item_height"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:orientation="vertical"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingEnd="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fanTest_value_small"
+                        android:layout_marginTop="10dp"
+                        android:theme="@style/baseTextTheme" />
+
+                    <EditText
+                        android:imeOptions="actionDone"
+                        android:gravity="center"
+                        android:id="@+id/et_small_wind3"
+                        android:layout_width="@dimen/main_tv_width"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:inputType="number"
+                        android:theme="@style/baseTextTheme" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fanTest_value_middle"
+                        android:layout_marginTop="10dp"
+                        android:theme="@style/baseTextTheme" />
+
+                    <EditText
+                        android:imeOptions="actionDone"
+                        android:id="@+id/et_middle_wind3"
+                        android:layout_width="@dimen/main_tv_width"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:theme="@style/baseTextTheme" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fanTest_value_high"
+                        android:layout_marginTop="10dp"
+                        android:theme="@style/baseTextTheme" />
+
+                    <EditText
+                        android:imeOptions="actionDone"
+                        android:gravity="center"
+                        android:id="@+id/et_high_wind3"
+                        android:layout_width="@dimen/main_tv_width"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/hy_lay_dp_10"
+                        android:background="@drawable/rounded_border_bg"
+                        android:inputType="number"
+                        android:theme="@style/baseTextTheme" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingEnd="30dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|top"
+                >
+
+                <Button
+                    android:id="@+id/bt_wind3"
+                    android:layout_width="@dimen/main_bt_width"
+                    android:layout_height="@dimen/main_bt_height"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/button_style_bg"
+                    android:text="@string/setting_complete"
+                    android:theme="@style/baseTextTheme2" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</merge>

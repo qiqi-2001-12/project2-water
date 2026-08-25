@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <dimen name="hy_font_sp_8">8.0sp</dimen>
+    <dimen name="hy_font_sp_10">10.0sp</dimen>
+    <dimen name="hy_font_sp_12">12.0sp</dimen>
+    <dimen name="hy_font_sp_14">14.0sp</dimen>
+	<dimen name="hy_font_sp_15">15.0sp</dimen>
+	<dimen name="hy_font_sp_16">16.0sp</dimen>
+    <dimen name="hy_font_sp_18">18.0sp</dimen>
+    <dimen name="hy_font_sp_20">20.0sp</dimen>
+    <dimen name="hy_font_sp_22">22.0sp</dimen>
+    <dimen name="hy_font_sp_24">24.0sp</dimen>
+    <dimen name="hy_font_sp_26">26.0sp</dimen>
+    <dimen name="hy_font_sp_28">28.0sp</dimen>
+    <dimen name="hy_font_sp_30">30.0sp</dimen>
+    <dimen name="hy_font_sp_32">32.0sp</dimen>
+    <dimen name="hy_font_sp_36">36.0sp</dimen>
+    <dimen name="hy_font_sp_40">40.0sp</dimen>
+    <dimen name="hy_font_sp_50">50.0sp</dimen>
+    <dimen name="hy_font_sp_60">60.0sp</dimen>
+    <dimen name="hy_font_sp_72">72.0sp</dimen>
+    <!--    其它sp    -->
+</resources>

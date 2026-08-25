@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:layout_width="@dimen/hy_lay_dp_192"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_marginTop="@dimen/hy_lay_dp_76"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_log"
+            android:layout_width="@dimen/hy_lay_dp_116"
+            android:layout_height="@dimen/hy_lay_dp_23"/>
+        <com.hy.greenbuilding.ui.widget.verticaltablayout.VerticalTabLayout
+            android:layout_marginTop="@dimen/hy_lay_dp_30"
+            android:id="@+id/vertical_tab_layout"
+            android:paddingBottom="@dimen/hy_lay_dp_80"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:indicator_color="#FFFFFF"
+            android:foreground="?attr/selectableItemBackground"
+            app:indicator_gravity="fill"
+            app:tab_mode="fixed" />
+    </LinearLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>

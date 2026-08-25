@@ -1,0 +1,335 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第2路"
+            android:theme="@style/baseTextTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"  />
+
+        <Switch
+            android:padding="@dimen/hy_lay_dp_10"
+            android:id="@+id/set_expansion_switch_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:thumb="@drawable/switch_off_thumb"
+            android:track="@drawable/switch_track_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView_2"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_control_method2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="控制方式"
+            android:theme="@style/baseTextTheme" />
+
+        <RadioGroup
+            android:id="@+id/radio_group_mode2"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/hy_lay_dp_40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:paddingLeft="@dimen/hy_lay_dp_15"
+                android:buttonTint="#000000"
+                android:id="@+id/rb_mode2"
+                android:textSize="@dimen/hy_font_sp_24"
+                android:textColor="#000"
+                android:text="自动"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:layout_marginLeft="@dimen/hy_lay_dp_39"
+                android:paddingLeft="@dimen/hy_lay_dp_15"
+                android:buttonTint="#000000"
+                android:id="@+id/rb_manual2"
+                android:textSize="@dimen/hy_font_sp_24"
+                android:textColor="#000"
+                android:text="手动"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:layout_marginLeft="@dimen/hy_lay_dp_39"
+                android:paddingLeft="@dimen/hy_lay_dp_15"
+                android:buttonTint="#000000"
+                android:id="@+id/rb_pid2"
+                android:textSize="@dimen/hy_font_sp_24"
+                android:textColor="#000"
+                android:text="PID开度调节"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_electronic_expansion2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="电子膨胀阀2：除湿电子膨胀阀"
+        android:theme="@style/baseTextTheme" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_electronic_expansion3"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_shineng3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能"
+            android:theme="@style/baseTextTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"  />
+
+        <Switch
+            android:padding="@dimen/hy_lay_dp_10"
+            android:id="@+id/switch_shineng3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:thumb="@drawable/switch_off_thumb"
+            android:track="@drawable/switch_track_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView_shineng3"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_eev2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="EEV开度"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/hy_lay_dp_45"
+            android:id="@+id/tv_eev_2"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_expansion_open2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="手动开度"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:layout_marginLeft="@dimen/hy_lay_dp_39"
+            android:id="@+id/pid_value_dehumidify"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border_bg"
+            android:gravity="center"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pid2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PID开度调节"
+        android:textColor="#000"
+        android:textSize="@dimen/hy_font_sp_22" />
+
+    <LinearLayout
+        android:id="@+id/ll_pid_value_heating2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="除湿目标值"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:layout_marginLeft="@dimen/hy_lay_dp_18"
+            android:id="@+id/pid_value_dehumidify_target"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border_bg"
+            android:gravity="center"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_pid_value_refrigeration2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="固定开度调节"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:layout_marginLeft="@dimen/hy_lay_dp_5"
+            android:id="@+id/regular_value_et"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/rounded_border_bg"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_dian2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="电磁阀2：\u0020\u0020除湿电磁阀"
+        android:textColor="#000"
+        android:textSize="@dimen/hy_font_sp_22" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_switch_shineng4"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_shineng4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能"
+            android:theme="@style/baseTextTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"  />
+
+        <Switch
+            android:padding="@dimen/hy_lay_dp_10"
+            android:id="@+id/switch_shineng4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:thumb="@drawable/switch_off_thumb"
+            android:track="@drawable/switch_track_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView_shineng4"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:id="@+id/tv_switch_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开关状态："
+        android:theme="@style/baseTextTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_manual_mode2"
+        android:layout_marginTop="@dimen/hy_lay_dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手动状态："
+            android:theme="@style/baseTextTheme" />
+
+        <RadioGroup
+            android:layout_marginLeft="@dimen/hy_lay_dp_20"
+            android:id="@+id/radio_group_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:paddingLeft="@dimen/hy_lay_dp_21"
+                android:layout_width="wrap_content"
+                android:id="@+id/radio_btn_open2"
+                android:layout_height="wrap_content"
+                android:buttonTint="#000000"
+                android:text="开启"
+                android:textColor="#000"
+                android:textSize="@dimen/hy_font_sp_24" />
+
+            <RadioButton
+                android:layout_marginLeft="@dimen/hy_lay_dp_60"
+                android:paddingLeft="@dimen/hy_lay_dp_21"
+                android:layout_width="wrap_content"
+                android:id="@+id/radio_btn_close2"
+                android:layout_height="wrap_content"
+                android:buttonTint="#000000"
+                android:text="关闭"
+                android:textColor="#000"
+                android:textSize="@dimen/hy_font_sp_24" />
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

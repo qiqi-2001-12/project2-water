@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <include layout="@layout/up_temp_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/main_bottom_bg"
+        android:gravity="center"
+        android:orientation="vertical"/>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:background="@drawable/main_left_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/hy_lay_dp_16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/li_back"
+                android:layout_width="@dimen/li_return_image"
+                android:layout_height="@dimen/li_return_image"
+                android:padding="@dimen/hy_lay_dp_15"
+                android:gravity="center"
+                android:src="@drawable/icon_return"
+                android:tint="#000"/>
+
+            <Button
+                android:id="@+id/bt_pvTemp_test"
+                android:layout_width="@dimen/hy_lay_dp_130"
+                android:layout_height="@dimen/hy_lay_dp_60"
+                android:layout_gravity="center"
+                android:background="@drawable/button_style_bg"
+                android:text="测试工况"
+                android:theme="@style/baseTextTheme1"
+                android:textColor="#fff"/>
+
+            <Button
+                android:id="@+id/bt_error"
+                android:layout_width="@dimen/hy_lay_dp_130"
+                android:layout_height="@dimen/hy_lay_dp_60"
+                android:layout_gravity="center"
+                android:background="@drawable/button_style_bg"
+                android:text="故障信息"
+                android:layout_marginStart="@dimen/hy_lay_dp_16"
+                android:theme="@style/baseTextTheme1"
+                android:textColor="#fff"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="运行监控"
+                android:textColor="#000"
+                android:textSize="@dimen/hy_font_sp_26" />
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:padding="@dimen/hy_lay_dp_20"
+            android:id="@+id/rl_upTemp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/home_tq_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/home_tq_bg"
+            android:orientation="vertical"/>
+    </LinearLayout>
+</LinearLayout>

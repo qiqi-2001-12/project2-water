@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hy.greenbuilding.ui.widget.KeyboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/keyboard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F4F0EA"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/hy_lay_dp_71"
+    android:paddingTop="@dimen/hy_lay_dp_50"
+    android:paddingRight="@dimen/hy_lay_dp_71"
+    android:paddingBottom="@dimen/hy_lay_dp_50"
+    android:windowSoftInputMode="stateVisible|adjustResize">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Switch
+                android:id="@+id/switch_humidity_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:stateListAnimator="@null"
+                android:thumb="@drawable/switch_off_thumb"
+                android:track="@drawable/switch_track_selector" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_16"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_timing_long"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <EditText
+                    android:id="@+id/et_day"
+                    android:layout_width="@dimen/hy_lay_dp_80"
+                    android:layout_height="@dimen/hy_lay_dp_30"
+                    android:layout_marginStart="@dimen/hy_lay_dp_36"
+                    android:background="@drawable/rounded_border_bg"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:text="0"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_15"
+                    android:text="@string/set_timing_day"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_54"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_timing_current1"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <EditText
+                    android:id="@+id/et_before_time1"
+                    android:layout_width="@dimen/hy_lay_dp_63"
+                    android:layout_height="@dimen/hy_lay_dp_30"
+                    android:layout_marginStart="@dimen/hy_lay_dp_36"
+                    android:background="@drawable/rounded_border_bg"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_14"
+                    android:text="@string/set_timing_hour"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_22"
+                    android:text="至"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <EditText
+                    android:id="@+id/et_after_time1"
+                    android:layout_width="@dimen/hy_lay_dp_63"
+                    android:layout_height="@dimen/hy_lay_dp_30"
+                    android:layout_marginStart="@dimen/hy_lay_dp_33"
+                    android:background="@drawable/rounded_border_bg"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_14"
+                    android:text="@string/set_timing_hour"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_47"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_timing_current2"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <EditText
+                    android:id="@+id/et_before_time2"
+                    android:layout_width="@dimen/hy_lay_dp_63"
+                    android:layout_height="@dimen/hy_lay_dp_30"
+                    android:layout_marginStart="@dimen/hy_lay_dp_36"
+                    android:background="@drawable/rounded_border_bg"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_14"
+                    android:text="@string/set_timing_hour"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_22"
+                    android:text="至"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <EditText
+                    android:id="@+id/et_after_time2"
+                    android:layout_width="@dimen/hy_lay_dp_63"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_33"
+                    android:background="@drawable/rounded_border_bg"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_14"
+                    android:text="@string/set_timing_hour"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_45"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_timing_current3"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <EditText
+                    android:id="@+id/et_before_time3"
+                    android:layout_width="@dimen/hy_lay_dp_63"
+                    android:layout_height="@dimen/hy_lay_dp_30"
+                    android:layout_marginStart="@dimen/hy_lay_dp_36"
+                    android:background="@drawable/rounded_border_bg"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_14"
+                    android:text="@string/set_timing_hour"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_22"
+                    android:text="至"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <EditText
+                    android:id="@+id/et_after_time3"
+                    android:layout_width="@dimen/hy_lay_dp_63"
+                    android:layout_height="@dimen/hy_lay_dp_30"
+                    android:layout_marginStart="@dimen/hy_lay_dp_33"
+                    android:background="@drawable/rounded_border_bg"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_14"
+                    android:text="@string/set_timing_hour"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/bt_timing_set"
+                        android:layout_width="@dimen/main_bt_width"
+                        android:layout_height="@dimen/main_bt_height2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/hy_lay_dp_50"
+                        android:background="@drawable/button_style_bg"
+                        android:text="@string/set_timing_button"
+                        android:theme="@style/baseTextTheme" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</com.hy.greenbuilding.ui.widget.KeyboardLayout>

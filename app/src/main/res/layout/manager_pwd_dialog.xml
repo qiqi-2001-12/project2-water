@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#F4F0EA"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="gone"
+    android:id="@+id/fl_password_overlay"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_50"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/yonghu" />
+
+        <EditText
+            android:layout_width="400dp"
+            android:layout_height="@dimen/hy_lay_dp_70"
+            android:layout_marginStart="@dimen/hy_lay_dp_5"
+            android:textColor="@color/baseTextColor"
+            android:textSize="@dimen/hy_font_sp_26"
+            android:theme="@style/myEditText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_150"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/password"
+            android:tint="#000"
+            />
+
+        <EditText
+            android:id="@+id/et_manager_pwd"
+            android:layout_width="400dp"
+            android:layout_height="@dimen/hy_lay_dp_70"
+            android:layout_marginStart="@dimen/hy_lay_dp_5"
+            android:inputType="textPassword"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_26"
+            android:theme="@style/myEditText"
+            android:backgroundTint="#000000"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="@dimen/hy_lay_dp_200"
+        android:id="@+id/bt_pwd_sure"
+        android:layout_width="400dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button_style_bg"
+        android:text="确定"
+        android:theme="@style/baseTextTheme1"
+        android:textColor="#fff"/>
+
+</LinearLayout>

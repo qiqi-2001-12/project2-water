@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:width="@dimen/hy_lay_dp_24" android:height="@dimen/hy_lay_dp_24">
+                <bitmap
+                    android:src="@drawable/icon_refrigeration_white"/>
+            </item>
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list>
+            <item android:width="@dimen/hy_lay_dp_24" android:height="@dimen/hy_lay_dp_24">
+                <bitmap
+                    android:src="@drawable/icon_refrigeration_black" />
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

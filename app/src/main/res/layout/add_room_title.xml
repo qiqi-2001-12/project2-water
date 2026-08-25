@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginLeft="@dimen/hy_lay_dp_31"
+        android:paddingTop="@dimen/hy_lay_dp_6"
+        android:paddingBottom="@dimen/hy_lay_dp_6"
+        android:paddingLeft="@dimen/hy_lay_dp_16"
+        android:paddingRight="@dimen/hy_lay_dp_16"
+        android:id="@+id/tv_addRoomTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/hy_font_sp_20"
+        android:background="@drawable/text_bg"
+        android:textColor="@drawable/selector_btn_text_color"
+        />
+
+</LinearLayout>

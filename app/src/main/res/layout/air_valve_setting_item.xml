@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/hy_lay_dp_8"
+    android:layout_marginTop="@dimen/hy_lay_dp_8"
+    android:background="@drawable/home_tq_bg"
+    android:gravity="center"
+    android:padding="@dimen/hy_lay_dp_16"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="@dimen/hy_font_sp_22"
+        tools:text="风阀1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_8"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最大开度值"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:id="@+id/max_num_et"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="0"
+            android:background="@drawable/rounded_border_bg"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText"
+            android:textColor="#000"/>
+
+        <Button
+            android:id="@+id/max_num_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/hy_lay_dp_10"
+            android:background="@drawable/button_style_bg"
+            android:padding="@dimen/hy_lay_dp_8"
+            android:text="@string/setting_txt"
+            android:theme="@style/baseTextTheme1"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_8"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置开度值"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:id="@+id/open_value_et"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="0"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText"
+            android:background="@drawable/rounded_border_bg"
+            />
+
+        <Button
+            android:id="@+id/open_value_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/hy_lay_dp_10"
+            android:background="@drawable/button_style_bg"
+            android:padding="@dimen/hy_lay_dp_8"
+            android:text="@string/setting_txt"
+            android:theme="@style/baseTextTheme1"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_8"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="实际开度值"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:id="@+id/real_value_tv"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border_bg"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            tools:text="10" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_left_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hy_lay_dp_30"
+        android:text="升温除湿"
+        android:textColor="#000"
+        android:textSize="@dimen/hy_font_sp_30" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/hy_lay_dp_16">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="开关模式"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/switch_status_tv"
+                android:layout_width="@dimen/hy_lay_dp_100"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="设定模式"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/set_status_tv"
+                android:layout_width="@dimen/hy_lay_dp_100"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:orientation="horizontal"
+            android:textColor="#000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="设定温度"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/set_temp_tv"
+                android:layout_width="@dimen/hy_lay_dp_100"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/hy_lay_dp_16">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:textColor="#000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="出风温度"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/wind_temp_tv"
+                android:layout_width="@dimen/hy_lay_dp_100"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="室内温度"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/indoor_temp_tv"
+                android:layout_width="@dimen/hy_lay_dp_100"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="升温盘管"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/up_pipe_tv"
+                android:layout_width="@dimen/hy_lay_dp_100"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="除湿盘管"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/humidity_pipe_tv"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="@dimen/hy_lay_dp_24">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="强制除霜"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_20" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_5"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/open_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="启用"
+                android:buttonTint="#000000"
+                android:textColor="#000"
+                android:textSize="@dimen/hy_font_sp_22" />
+
+            <RadioButton
+                android:id="@+id/not_open_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_10"
+                android:text="不启用"
+                android:buttonTint="#000000"
+                android:textColor="#000"
+                android:textSize="@dimen/hy_font_sp_22" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+</LinearLayout>

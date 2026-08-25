@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/hy_lay_dp_8">
+
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/hy_lay_dp_80"
+                android:layout_height="@dimen/hy_lay_dp_80"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/hy_lay_dp_8"
+                android:paddingEnd="@dimen/hy_lay_dp_8">
+
+                <TextView
+                    android:id="@+id/title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="生态环境"
+                    android:textColor="@color/baseTextColor"
+                    android:textSize="@dimen/hy_font_sp_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/hy_lay_dp_5"
+                    android:text="@string/app_version_title"
+                    android:textColor="@color/baseTextColor"
+                    android:textSize="@dimen/hy_font_sp_18"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+
+                <TextView
+                    android:id="@+id/tv_app_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_3"
+                    android:text="8.3"
+                    android:textColor="@color/baseTextColor"
+                    android:textSize="@dimen/hy_font_sp_18"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+                    app:layout_constraintStart_toEndOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_control_version"
+                    android:textColor="@color/baseTextColor"
+                    android:textSize="@dimen/hy_font_sp_18"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/tv_control_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_3"
+                    android:text="4.0"
+                    android:textColor="@color/baseTextColor"
+                    android:textSize="@dimen/hy_font_sp_18"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView1"
+                    app:layout_constraintStart_toEndOf="@+id/textView1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_version_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/baseTextTheme1"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/l1" />
+
+        <TextView
+            android:id="@+id/humidity_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="除湿控温"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_version_update" />
+
+        <TextView
+            android:id="@+id/screen_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="滤网设定"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/humidity_tv" />
+
+        <TextView
+            android:id="@+id/time_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="定时设置"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/screen_tv" />
+
+        <TextView
+            android:id="@+id/room_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="添加房间"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_tv" />
+
+        <TextView
+            android:id="@+id/electric_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="电量显示"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/room_tv" />
+
+        <TextView
+            android:id="@+id/location_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="安装区域设定"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/electric_tv" />
+
+        <TextView
+            android:id="@+id/code_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_8"
+            android:gravity="center"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="机组二维码"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_tv" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_16"
+            android:text="@string/low_power_mode"
+            android:theme="@style/baseTextTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/code_tv" />
+
+        <Switch
+            android:id="@+id/set_power_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/switch_thumb_selector"
+            android:track="@drawable/switch_track_selector"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_16"
+            android:text="@string/care_mode"
+            android:theme="@style/baseTextTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <Switch
+            android:id="@+id/set_care_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/switch_thumb_selector"
+            android:track="@drawable/switch_track_selector"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/reset_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_16"
+            android:layout_marginBottom="@dimen/hy_lay_dp_16"
+            android:background="@drawable/pwd_btn_bg"
+            android:paddingStart="@dimen/hy_lay_dp_16"
+            android:paddingEnd="@dimen/hy_lay_dp_16"
+            android:paddingTop="@dimen/hy_lay_dp_8"
+            android:paddingBottom="@dimen/hy_lay_dp_8"
+            android:text="恢复出厂设置"
+            android:theme="@style/baseTextTheme1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

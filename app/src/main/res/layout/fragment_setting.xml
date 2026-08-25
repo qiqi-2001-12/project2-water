@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/hy_lay_dp_19"
+    android:paddingTop="@dimen/hy_lay_dp_35"
+    android:paddingRight="@dimen/hy_lay_dp_22">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/hy_lay_dp_22"
+        android:paddingTop="@dimen/hy_lay_dp_20"
+        android:paddingBottom="@dimen/hy_lay_dp_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="室内状况"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_59"
+            android:text="温度"
+            android:textColor="#7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:id="@+id/tv_inRoom_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_6"
+            android:text="-"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="℃"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_18" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_34"
+            android:text="湿度"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:id="@+id/tv_inRoom_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_6"
+            android:text="-"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_18" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_43"
+            android:text="PM2.5"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:id="@+id/tv_inRoom_pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_6"
+            android:text="-"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ug/m³"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_18" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_42"
+            android:text="CO2"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:id="@+id/tv_inRoom_co2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hy_lay_dp_3"
+            android:text="-"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ppm"
+            android:textColor="#ff7C7E80"
+            android:textSize="@dimen/hy_font_sp_18" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/hy_lay_dp_69"
+        android:layout_marginTop="@dimen/hy_lay_dp_39"
+        android:clipToPadding="false"
+        app:tabBackground="@drawable/text_bg"
+        app:tabIndicatorHeight="0dp"
+        app:tabMinWidth="@dimen/hy_lay_dp_44"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabTextAppearance="@style/TabTextStyle" />
+
+    <com.hy.greenbuilding.ui.widget.NoScrollViewPager
+        android:layout_marginTop="@dimen/hy_lay_dp_57"
+        android:id="@+id/viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

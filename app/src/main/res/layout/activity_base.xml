@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal"
+    android:id="@+id/ll_pop"
+    android:padding="@dimen/hy_lay_dp_10"
+    android:orientation="vertical">
+
+    <!-- 您的横线 View -->
+    <View
+        android:layout_width="@dimen/hy_lay_dp_170"
+        android:layout_height="@dimen/hy_lay_dp_5"
+        android:layout_marginTop="@dimen/hy_lay_dp_18"
+        android:background="#AE8567" />
+</LinearLayout>

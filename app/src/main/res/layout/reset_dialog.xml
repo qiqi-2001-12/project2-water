@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_left_bg"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/et_manager_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="#000"
+            android:textSize="30sp"
+            android:text="重置计时"
+            android:theme="@style/myEditText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/bt_reset_sure"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:background="@drawable/pwd_btn_bg"
+            android:text="确定"
+            android:theme="@style/baseTextTheme1" />
+    </LinearLayout>
+
+</LinearLayout>

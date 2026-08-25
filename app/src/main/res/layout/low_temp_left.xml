@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/indoor_test"
+        android:theme="@style/baseTextTheme" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="670dp"
+        android:background="@drawable/home_tq_bg"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:padding="@dimen/hy_lay_dp_20"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/air_mode"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/low_airMode"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:background="@drawable/rounded_border_bg"
+                android:textColor="#000"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/in_wind_speed"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:id="@+id/low_runSpeed"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:textColor="#000">
+
+            <TextView
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/set_wind_speed"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/low_setSpeed"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/text_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/NTC"
+            android:visibility="invisible"
+            android:theme="@style/baseTextTheme"
+            android:textColor="#000"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/indoor_coil"
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:id="@+id/low_inNtc"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/text_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="室内环温  "
+                android:theme="@style/baseTextTheme2" />
+
+            <TextView
+                android:id="@+id/low_outNtc"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/text_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="定频工况"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/low_frequency_Condition"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="能力测试工况"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/low_testCondition"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:textColor="@color/baseTextColor">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="调节膨胀阀开度"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/low_expansion_valve"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_border_bg"
+                android:gravity="center"
+                android:theme="@style/baseTextTheme2"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_style_bg"
+            android:text="测试工况"
+            android:id="@+id/bt_lowTemp_test"
+            android:textColor="#fff"
+            android:theme="@style/baseTextTheme1" />
+
+    </LinearLayout>
+</LinearLayout>

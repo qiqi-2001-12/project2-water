@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+
+    android:fitsSystemWindows="true"
+    android:orientation="horizontal"
+    android:padding="@dimen/hy_lay_dp_15">
+
+    <include layout="@layout/setting_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/main_left_bg"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/hy_lay_dp_15"
+        android:layout_weight="5"
+        android:background="@drawable/main_left_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hy_lay_dp_80"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/hy_lay_dp_10">
+
+            <ImageView
+                android:id="@+id/li_back"
+
+                android:layout_width="@dimen/hy_lay_dp_120"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_return" />
+
+            <Button
+                android:layout_toRightOf="@+id/li_back"
+                android:id="@+id/bt_system_setting"
+                android:layout_width="@dimen/hy_lay_dp_150"
+                android:layout_height="@dimen/hy_lay_dp_60"
+                android:layout_marginStart="@dimen/hy_lay_dp_48"
+                android:background="@drawable/button_style_bg"
+                android:text="@string/system_setting"
+                android:theme="@style/baseTextTheme" />
+
+            <ImageView
+                android:id="@+id/iv_manager"
+                android:layout_width="@dimen/hy_lay_dp_76"
+                android:layout_height="@dimen/hy_lay_dp_76"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/hy_lay_dp_15"
+                android:scaleType="centerInside"
+                android:src="@drawable/manager_icon" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>

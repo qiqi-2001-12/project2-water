@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/hy_lay_dp_15"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hy_lay_dp_30"
+            android:text="@string/anti_freezing_title"
+            android:theme="@style/baseTextTheme" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/hy_lay_dp_30"
+            android:padding="@dimen/hy_lay_dp_15"
+            android:text="@string/anti_freezing_info"
+            android:theme="@style/baseTextTheme"
+            android:background="@drawable/home_tq_bg"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/hy_lay_dp_15"
+        android:layout_marginEnd="@dimen/hy_lay_dp_15"
+        android:layout_weight="5"
+        android:background="@drawable/main_left_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/hy_lay_dp_16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/li_back"
+                android:layout_width="@dimen/li_return_image"
+                android:layout_height="@dimen/li_return_image"
+                android:padding="@dimen/hy_lay_dp_15"
+                android:gravity="center"
+                android:src="@drawable/icon_return"
+                android:tint="#000"/>
+
+            <TextView
+                android:id="@+id/tv_pid_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="@dimen/hy_lay_dp_15"
+                android:theme="@style/baseTextTheme"
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="860dp"
+                    android:layout_height="@dimen/hy_lay_dp_350"
+                    android:background="@drawable/home_tq_bg"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/hy_lay_dp_20">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:text="@string/set_pid_temp1"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_freezing_temp1"
+                            android:layout_width="@dimen/main_tv_width"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:theme="@style/myEditText"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/temp_company"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <Button
+                            android:id="@+id/bt_freezing_set1"
+                            android:layout_width="@dimen/hy_lay_dp_120"
+                            android:layout_height="@dimen/hy_lay_dp_50"
+                            android:layout_marginStart="@dimen/hy_lay_dp_5"
+                            android:background="@drawable/button_style_bg"
+                            android:text="@string/setting_txt"
+                            android:theme="@style/baseTextTheme1"
+                            android:textColor="#fff"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_10"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:text="@string/set_pid_temp2"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_freezing_temp2"
+                            android:layout_width="@dimen/main_tv_width"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:theme="@style/myEditText"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/temp_company"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <Button
+                            android:id="@+id/bt_freezing_set2"
+                            android:layout_width="@dimen/hy_lay_dp_120"
+                            android:layout_height="@dimen/hy_lay_dp_50"
+                            android:layout_marginStart="@dimen/hy_lay_dp_5"
+                            android:background="@drawable/button_style_bg"
+                            android:text="@string/setting_txt"
+                            android:theme="@style/baseTextTheme1"
+                            android:textColor="#fff"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="@dimen/hy_lay_dp_20"
+                        android:text="@string/anti_freezing_info1"
+                        android:textColor="@color/themeColor"
+                        android:textSize="@dimen/hy_font_sp_20" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/hy_lay_dp_15"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:text="@string/pid_out_temp"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_outTerm_temp"
+                            android:layout_width="@dimen/main_tv_width"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="numberSigned"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            android:theme="@style/myEditText" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_5"
+                            android:text="@string/temp_company"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <Button
+                            android:id="@+id/bt_outTerm_set"
+                            android:layout_width="@dimen/hy_lay_dp_120"
+                            android:layout_height="@dimen/hy_lay_dp_50"
+                            android:layout_marginStart="@dimen/hy_lay_dp_10"
+                            android:background="@drawable/button_style_bg"
+                            android:text="@string/setting_txt"
+                            android:theme="@style/baseTextTheme1"
+                            android:textColor="#fff"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/hy_lay_dp_20"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pid_ntc_temp"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <TextView
+                            android:id="@+id/tv_ntc_temp"
+                            android:layout_width="@dimen/hy_lay_dp_120"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:theme="@style/baseTextTheme1"
+                            android:background="@drawable/rounded_border_bg"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_30"
+                            android:text="@string/fault_code"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <TextView
+                            android:id="@+id/tv_freezing_error"
+                            android:layout_width="@dimen/hy_lay_dp_150"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:background="@drawable/rounded_border_bg"
+                            android:gravity="center"
+                            android:theme="@style/baseTextTheme1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/hy_lay_dp_15"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/outdoor_temp"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <TextView
+                            android:id="@+id/tv_outTerm_temp"
+                            android:layout_width="@dimen/hy_lay_dp_120"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:theme="@style/baseTextTheme1"
+                            android:background="@drawable/rounded_border_bg"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_30"
+                            android:text="@string/pid_ptc_temp"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <TextView
+                            android:id="@+id/tv_freezing_setTe"
+                            android:layout_width="@dimen/hy_lay_dp_120"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:background="@drawable/rounded_border_bg"
+                            android:gravity="center"
+                            android:theme="@style/baseTextTheme1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/hy_lay_dp_10"
+                    android:text="@string/pid_param_set"
+                    android:theme="@style/baseTextTheme" />
+
+                <LinearLayout
+                    android:layout_width="860dp"
+                    android:layout_height="@dimen/hy_lay_dp_260"
+                    android:background="@drawable/home_tq_bg"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/hy_lay_dp_20">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/hy_lay_dp_30">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/p_value"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_p_value"
+                            android:layout_width="@dimen/hy_lay_dp_100"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:theme="@style/myEditText"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_30"
+                            android:text="@string/i_value"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_i_value"
+                            android:layout_width="@dimen/hy_lay_dp_100"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:theme="@style/myEditText"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_30"
+                            android:text="@string/d_value"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_d_value"
+                            android:layout_width="@dimen/hy_lay_dp_100"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:theme="@style/myEditText"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/hy_lay_dp_10"
+                        android:text="@string/anti_freezing_info2"
+                        android:textColor="@color/themeColor"
+                        android:textSize="@dimen/hy_font_sp_20" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/hy_lay_dp_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pid_cycle"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_pid_time"
+                            android:layout_width="@dimen/hy_lay_dp_100"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:theme="@style/myEditText"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_80"
+                            android:text="@string/pid_min_input"
+                            android:theme="@style/baseTextTheme1" />
+
+                        <EditText
+                            android:id="@+id/et_pid_min"
+                            android:layout_width="@dimen/hy_lay_dp_100"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/hy_lay_dp_15"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:theme="@style/myEditText"
+                            android:backgroundTint="#000000"
+                            android:textColor="#000000"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/anti_freezing_info3"
+                            android:textColor="@color/themeColor"
+                            android:textSize="@dimen/hy_font_sp_20" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="80dp"
+                            android:text="@string/anti_freezing_info4"
+                            android:textColor="@color/themeColor"
+                            android:textSize="@dimen/hy_font_sp_20" />
+
+                        <Button
+                            android:id="@+id/bt_pid_set"
+                            android:layout_width="@dimen/main_tv_width1"
+                            android:layout_height="@dimen/main_bt_height2"
+                            android:layout_marginStart="150dp"
+                            android:background="@drawable/button_style_bg"
+                            android:text="@string/pid_write_param"
+                            android:theme="@style/baseTextTheme1"
+                            android:textColor="#fff"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="@drawable/home_tq_bg"
+    android:padding="@dimen/hy_lay_dp_20"
+    android:orientation="horizontal">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/switch_status_text"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:id="@+id/pv_OpenMode"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/defrost_signal"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_defrostStatus"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press_frequency"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_frequency"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/air_mode"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_airMode"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/set_temp"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_setTemp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/indoor_temp"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_inTemp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/cold_temp"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_condensation_temp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/exhaust_temp"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_exhaustTemp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/reset_temp"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/low_returnTemp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/fan_speed"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_outFanSpeed"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/electric_text"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_outElectric"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/voltage_text"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_voltage"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/module_temp"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_moduleTemp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/pv_power"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_power"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/device_power"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_totalPower"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/main_expansion1"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/low_mainExpansion"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                    
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/outdoor_temp"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_outTemp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/in_out_ntc"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/pv_outNtc"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/aux_expansion"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/low_auxExpansion"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_border_bg"
+                        android:gravity="center"
+                        android:theme="@style/baseTextTheme2"
+                        android:textColor="#000"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

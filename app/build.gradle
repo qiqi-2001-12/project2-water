@@ -1,0 +1,157 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildFeatures {
+        buildConfig true
+        viewBinding false
+    }
+
+    namespace 'com.hy.greenbuilding'
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.hy.green_building"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 116
+        versionName "16.2"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+//            cmake {
+//                cppFlags ""
+//                abiFilters 'arm64-v8a','armeabi-v7a','x86','x86_64'
+//            }
+            ndkBuild {
+                arguments "APP_PLATFORM=android-19"
+            }
+        }
+        ndk {
+            // moduleName "serial_port"
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+            ldLibs "log"
+        }
+    }
+
+
+    signingConfigs {
+        release {
+            storeFile file("${project.getRootDir()}/key/smart.jks")
+            storePassword 'hy666666'
+            keyAlias 'hy'
+            keyPassword 'hy666666'
+        }
+
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/cpp/Android.mk')
+
+        }
+
+    }
+
+    buildTypes {
+        release {
+
+            minifyEnabled false    // 开启代码混淆/删除无用代码
+            shrinkResources false  // 开启资源压缩，自动剔除无用资源
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            debuggable false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            //  signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    /*android.buildTypes {
+        release {
+            minifyEnabled true    // 开启代码混淆/删除无用代码
+            shrinkResources true  // 开启资源压缩，自动剔除无用资源
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }*/
+    // Butterknife requires Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.0'
+    }
+}
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.navigation:navigation-fragment:2.2.2'
+    implementation 'androidx.navigation:navigation-ui:2.2.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'org.greenrobot:greendao:3.2.2'
+    //    implementation 'com.xdandroid:hellodaemon:+'
+    implementation 'com.orhanobut:logger:2.1.1'
+    //    implementation 'com.jakewharton:butterknife:10.2.3'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    //implementation project(':org.eclipse.paho.android.service')
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+    implementation 'org.bouncycastle:bcpkix-jdk15on:1.59'
+//    implementation 'com.reginald:editspinner:1.0.0'
+    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+    implementation 'io.reactivex:rxjava:1.1.0'
+    implementation 'io.reactivex:rxandroid:1.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.0.1'
+//    implementation 'com.github.duanhong169:picker-view:0.3.1'
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.github.qstumn:BadgeView:1.1.3'
+    implementation 'com.github.F1ReKing:Android-SerialPort:1.5.1'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    implementation project(':gateway')
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+}

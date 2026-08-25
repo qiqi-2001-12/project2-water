@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <ImageView
+        android:id="@+id/iv_fan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/xinfengjizu"
+        android:tint="#000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_fan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/circle2_device"
+        android:theme="@style/baseTextTheme"
+        app:layout_constraintStart_toEndOf="@+id/iv_fan"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/li_fan1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_fan">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_fan_value"
+            android:theme="@style/baseTextTheme" />
+
+        <EditText
+            android:textColor="#000000"
+            android:id="@+id/et_value_wind4"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:theme="@style/myEditText"
+            android:backgroundTint="#000000"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/set_fan_address"
+            android:theme="@style/baseTextTheme" />
+
+        <EditText
+            android:textColor="#000000"
+            android:id="@+id/et_address_wind4"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:theme="@style/myEditText"
+            android:backgroundTint="#000000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="(1-247)"
+            android:theme="@style/baseTextTheme1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/li_fan2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/li_fan1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resp_fan_value"
+            android:theme="@style/baseTextTheme" />
+
+        <TextView
+            android:id="@+id/response_value_wind4"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/rounded_border_bg"
+            android:gravity="center"
+            android:theme="@style/baseTextTheme" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/resp_fan_address"
+            android:theme="@style/baseTextTheme" />
+
+        <TextView
+            android:id="@+id/response_address_wind4"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/rounded_border_bg"
+            android:gravity="center"
+            android:theme="@style/baseTextTheme" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center|end"
+        android:paddingRight="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/li_fan2">
+
+        <Button
+            android:id="@+id/bt_open_wind4"
+            android:layout_width="@dimen/main_bt_width"
+            android:layout_height="@dimen/main_bt_height1"
+            android:background="@drawable/btn_bg_common2"
+            android:text="@string/circle2_open"
+            android:theme="@style/baseTextTheme"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/bt_close_wind4"
+            android:layout_width="@dimen/main_bt_width"
+            android:layout_height="@dimen/main_bt_height1"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/btn_bg_common"
+            android:text="@string/circle2_close"
+            android:theme="@style/baseTextTheme"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/bt_set_wind4"
+            android:layout_width="@dimen/main_bt_width"
+            android:layout_height="@dimen/main_bt_height"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/button_style_bg"
+            android:text="@string/setting_complete"
+            android:theme="@style/baseTextTheme"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

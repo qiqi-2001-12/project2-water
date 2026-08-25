@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/hy_lay_dp_68"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/control_temp"
+            android:textSize="@dimen/hy_font_sp_40"
+            android:theme="@style/baseTextTheme" />
+
+
+        <Switch
+            android:visibility="gone"
+            android:id="@+id/switch_humidity_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/hy_lay_dp_50"
+            android:stateListAnimator="@null"
+            android:thumb="@drawable/switch_off_thumb"
+            android:track="@drawable/switch_track_selector" />
+
+        <Switch
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/hy_lay_dp_50"
+            android:id="@+id/set_temp_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/switch_off_thumb"
+            android:track="@drawable/switch_track_selector"
+            />
+
+    </RelativeLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/hy_lay_dp_23"
+        android:layout_marginTop="@dimen/hy_lay_dp_29"
+        android:layout_marginRight="@dimen/hy_lay_dp_27"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/hy_lay_dp_87"
+        android:paddingTop="@dimen/hy_lay_dp_36"
+        android:paddingBottom="@dimen/hy_lay_dp_49">
+
+        <RelativeLayout
+            android:layout_width="@dimen/hy_lay_dp_285"
+            android:layout_height="@dimen/hy_lay_dp_285"
+            android:background="@drawable/icon_temperature_control">
+
+            <TextView
+                android:id="@+id/tv_humidity_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/hy_lay_dp_59"
+                android:text="室内湿度"
+                android:textColor="@color/white"
+                android:textSize="@dimen/hy_font_sp_20" />
+
+            <TextView
+                android:layout_marginTop="@dimen/hy_lay_dp_73"
+                android:id="@+id/tv_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="-℃"
+                android:textColor="@color/white"
+                android:textSize="@dimen/hy_font_sp_72" />
+
+            <TextView
+                android:id="@+id/tv_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/hy_lay_dp_38"
+                android:text="湿度  -%"
+                android:textColor="@color/white"
+                android:textSize="@dimen/hy_font_sp_20" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_dehumidify"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/hy_lay_dp_96"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_65"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/control_temp_min"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+
+                <TextView
+                    android:id="@+id/tv_min_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_73"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="一"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+
+                <com.hy.greenbuilding.ui.widget.KeyboardEditText
+                    android:imeOptions="flagNoExtractUi"
+                    android:id="@+id/et_tempMin"
+                    android:layout_width="@dimen/hy_lay_dp_115"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:background="@null"
+                    android:maxLength="4"
+                    android:paddingTop="@dimen/hy_lay_dp_0"
+                    android:paddingBottom="@dimen/hy_lay_dp_0"
+                    android:text="-"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/hy_lay_dp_5"
+                    android:text="℃"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <TextView
+                    android:id="@+id/tv_min_plus"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="十"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_99"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/control_temp_max"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:id="@+id/tv_max_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_73"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="一"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <com.hy.greenbuilding.ui.widget.KeyboardEditText
+                    android:imeOptions="flagNoExtractUi"
+                    android:id="@+id/et_tempMax"
+                    android:layout_width="@dimen/hy_lay_dp_115"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingTop="@dimen/hy_lay_dp_0"
+                    android:paddingBottom="@dimen/hy_lay_dp_0"
+                    android:text="-"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/hy_lay_dp_5"
+                    android:text="℃"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/hy_lay_dp_36"
+                    android:id="@+id/tv_max_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="十"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+            </LinearLayout>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/bt_setTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/hy_lay_dp_10"
+                android:background="@drawable/button_style_bg"
+                android:text="@string/set_temp_button"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_temperature"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/hy_lay_dp_96"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/hy_lay_dp_80"
+                android:layout_marginTop="@dimen/hy_lay_dp_77"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_dehumidify_title"
+                    android:textSize="@dimen/hy_font_sp_24"
+                    android:theme="@style/baseTextTheme1" />
+
+                <TextView
+                    android:id="@+id/tv_cold_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_73"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="一"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <com.hy.greenbuilding.ui.widget.KeyboardEditText
+                    android:id="@+id/et_humidity"
+                    android:layout_width="@dimen/hy_lay_dp_115"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingTop="@dimen/hy_lay_dp_0"
+                    android:paddingBottom="@dimen/hy_lay_dp_0"
+                    android:text="-"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/humidity_company"
+                    android:theme="@style/baseTextTheme1" />
+
+                <TextView
+                    android:id="@+id/tv_cold_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_36"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="十"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/hy_lay_dp_80"
+                android:layout_marginTop="@dimen/hy_lay_dp_50"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_humidify_title"
+                    android:textSize="@dimen/hy_font_sp_24"
+                    android:theme="@style/baseTextTheme1" />
+
+                <TextView
+                    android:id="@+id/tv_humidify_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_73"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="一"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <com.hy.greenbuilding.ui.widget.KeyboardEditText
+                    android:id="@+id/et_humidity1"
+                    android:layout_width="@dimen/hy_lay_dp_115"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingTop="@dimen/hy_lay_dp_0"
+                    android:paddingBottom="@dimen/hy_lay_dp_0"
+                    android:text="-"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/hy_font_sp_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/humidity_company"
+                    android:theme="@style/baseTextTheme1" />
+
+                <TextView
+                    android:id="@+id/tv_humidify_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_36"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_11"
+                    android:text="十"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hy_lay_dp_50">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="除湿温差"
+                    android:theme="@style/baseTextTheme1" />
+
+                <TextView
+                    android:id="@+id/tv_humid_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_50"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_5"
+                    android:text="一"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+
+                <com.hy.greenbuilding.ui.widget.KeyboardEditText
+                    android:imeOptions="flagNoExtractUi"
+                    android:text="0"
+                    android:id="@+id/et_humidityTemp"
+                    android:layout_width="@dimen/main_tv_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/hy_lay_dp_16"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:textColor="#3D3D3D"
+                    android:theme="@style/myEditText" />
+
+                <TextView
+                    android:id="@+id/tv_humid_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#d8d8d8"
+                    android:padding="@dimen/hy_lay_dp_5"
+                    android:text="十"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/hy_font_sp_20" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

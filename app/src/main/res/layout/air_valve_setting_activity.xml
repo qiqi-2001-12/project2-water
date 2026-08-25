@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingStart="@dimen/hy_lay_dp_32"
+    android:paddingTop="@dimen/hy_lay_dp_16"
+    android:paddingEnd="@dimen/hy_lay_dp_32"
+    android:paddingBottom="@dimen/hy_lay_dp_16">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_60"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/li_back"
+            android:layout_width="@dimen/li_return_image"
+            android:layout_height="@dimen/li_return_image"
+            android:gravity="center"
+            android:src="@drawable/icon_return"
+            android:tint="#000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="风阀控制"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_30" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_54"
+        android:layout_marginTop="@dimen/hy_lay_dp_16"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/hy_lay_dp_80"
+            android:layout_height="wrap_content"
+            android:text="新风"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <CheckBox
+            android:id="@+id/new_wind_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:text="定静压控制"
+            android:buttonTint="#000"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="实际压力值"
+            android:layout_marginStart="@dimen/hy_lay_dp_32"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:id="@+id/new_wind_value_tv"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/hy_lay_dp_8"
+            android:background="@drawable/rounded_border_bg"
+            android:gravity="center"
+            android:theme="@style/baseTextTheme"
+            android:textColor="#000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设定压力值"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:id="@+id/new_wind_value_et"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:gravity="center"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText"
+            android:backgroundTint="#000000"
+            />
+
+        <Button
+            android:id="@+id/new_wind_value_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:background="@drawable/button_style_bg"
+            android:padding="@dimen/hy_lay_dp_8"
+            android:text="@string/setting_txt"
+            android:theme="@style/baseTextTheme1"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_54"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/hy_lay_dp_8"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/hy_lay_dp_80"
+            android:layout_height="wrap_content"
+            android:text="排风"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <CheckBox
+            android:id="@+id/exhaust_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定静压控制"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:buttonTint="#000"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_32"
+            android:text="实际压力值"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:id="@+id/exhaust_value_tv"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_8"
+            android:background="@drawable/rounded_border_bg"
+            android:gravity="center"
+            android:theme="@style/baseTextTheme" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设定压力值"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:id="@+id/exhaust_value_et"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:gravity="center"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText"
+            android:backgroundTint="#000000"
+            />
+
+        <Button
+            android:id="@+id/exhaust_value_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:background="@drawable/button_style_bg"
+            android:padding="@dimen/hy_lay_dp_8"
+            android:text="@string/setting_txt"
+            android:theme="@style/baseTextTheme1"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_54"
+        android:layout_marginTop="@dimen/hy_lay_dp_8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/hy_lay_dp_80"
+            android:layout_height="wrap_content"
+            android:text="内循环"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <CheckBox
+            android:id="@+id/circle_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定静压控制"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:buttonTint="#000"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_32"
+            android:text="实际压力值"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <TextView
+            android:id="@+id/circle_value_tv"
+            android:layout_width="@dimen/main_tv_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_8"
+            android:background="@drawable/rounded_border_bg"
+            android:gravity="center"
+            android:theme="@style/baseTextTheme" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:text="设定压力值"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22" />
+
+        <com.hy.greenbuilding.ui.widget.KeyboardEditText
+            android:id="@+id/circle_value_et"
+            android:layout_width="@dimen/hy_lay_dp_100"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/hy_lay_dp_30"
+            android:gravity="center"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textSize="@dimen/hy_font_sp_22"
+            android:theme="@style/myEditText"
+            android:backgroundTint="#000000"
+            />
+
+        <Button
+            android:id="@+id/circle_value_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/hy_lay_dp_16"
+            android:background="@drawable/button_style_bg"
+            android:padding="@dimen/hy_lay_dp_8"
+            android:text="@string/setting_txt"
+            android:theme="@style/baseTextTheme1"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hy_lay_dp_60"
+        android:layout_marginTop="@dimen/hy_lay_dp_16"
+        android:layout_marginEnd="@dimen/hy_lay_dp_16"
+        android:gravity="center_vertical|end"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/auto_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/hy_lay_dp_10"
+            android:background="@drawable/button_style_bg"
+            android:padding="@dimen/hy_lay_dp_8"
+            android:text="自动模式"
+            android:theme="@style/baseTextTheme1" />
+
+        <Button
+            android:id="@+id/manual_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/hy_lay_dp_10"
+            android:background="@drawable/btn_bg_common2"
+            android:padding="@dimen/hy_lay_dp_8"
+            android:text="手动模式"
+            android:theme="@style/baseTextTheme1" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="@dimen/hy_lay_dp_8"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

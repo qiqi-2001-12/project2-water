@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hy.greenbuilding.ui.widget.NewNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_left_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="@dimen/fanTest_width"
+            android:layout_height="@dimen/fanTest_height"
+            android:background="@drawable/home_tq_bg"
+            android:orientation="vertical">
+
+            <include layout="@layout/wind_type1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/fanTest_width"
+            android:layout_height="@dimen/fanTest_height"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/home_tq_bg"
+            android:orientation="vertical">
+
+            <include layout="@layout/wind_type2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/fanTest_width"
+            android:layout_height="@dimen/fanTest_height"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/home_tq_bg"
+            android:orientation="vertical">
+
+            <include layout="@layout/wind_type3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/fanTest_width"
+            android:layout_height="@dimen/fanTest_height"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/home_tq_bg"
+            android:orientation="vertical">
+
+            <include layout="@layout/wind_type4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/fanTest_width"
+            android:layout_height="@dimen/fanTest_height"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/home_tq_bg"
+            android:orientation="vertical">
+
+            <include layout="@layout/threshold_module" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.hy.greenbuilding.ui.widget.NewNestedScrollView>

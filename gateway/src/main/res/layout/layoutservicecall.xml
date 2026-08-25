@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/callbg" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calltexttitle"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/callconnectbg" />
+
+    <ImageView
+        android:id="@+id/callimagel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/callimager1"
+        android:layout_marginStart="145dp"
+        android:src="@drawable/callconnectl1" />
+
+    <ImageView
+        android:id="@+id/callimagel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/callimager2"
+        android:layout_marginEnd="-144dp"
+        android:layout_toStartOf="@+id/callimagel1"
+        android:src="@drawable/callconnectl2" />
+
+    <ImageView
+        android:id="@+id/callimagel3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageView3"
+        android:layout_alignTop="@+id/imageView3"
+        android:src="@drawable/callconnectl3" />
+
+    <ImageView
+        android:id="@+id/callimager1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="143dp"
+        android:layout_marginTop="106dp"
+        android:src="@drawable/callconnectr1" />
+
+    <ImageView
+        android:id="@+id/callimager2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-143dp"
+        android:layout_marginTop="83dp"
+        android:layout_toEndOf="@+id/callimager1"
+        android:src="@drawable/callconnectr2" />
+
+    <ImageView
+        android:id="@+id/callimager3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView3"
+        android:layout_alignTop="@+id/imageView3"
+        android:src="@drawable/callconnectr3" />
+
+    <ImageView
+        android:id="@+id/callImageStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/callclose" />
+
+    <TextView
+        android:id="@+id/calltexttitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FF13b32c"
+        android:textSize="18dp"
+        android:layout_marginTop="40dp"
+        android:text="呼叫服务中心" />
+
+    <TextView
+        android:id="@+id/calltextprompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="84dp"
+        android:text="系统繁忙，请稍候再拨"
+        android:visibility="invisible"
+        android:textColor="#FFd63e3e"
+        android:textSize="18dp" />
+</RelativeLayout>

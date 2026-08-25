@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 禁用状态（enabled=false）：浅灰背景 + 灰色边框 -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <!-- 禁用时的背景色（浅灰色，比可输入的 #F7F8FA 深一点） -->
+            <solid android:color="#CCCCCC" />
+            <!-- 和原有样式一致的边框宽度、颜色 -->
+            <stroke android:width="1dp" android:color="#C4C4C4" />
+        </shape>
+    </item>
+
+    <!-- 启用状态（enabled=true）：保留你原来的样式 -->
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <!-- 你原来的可输入背景色 -->
+            <solid android:color="#F7F8FA" />
+            <!-- 你原来的边框样式 -->
+            <stroke android:width="1dp" android:color="#C4C4C4" />
+        </shape>
+    </item>
+</selector>
