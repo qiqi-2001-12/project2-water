@@ -127,6 +127,7 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
     private String mLowTemp = "低温增焓";
     private String mPV = "光伏";
     private String mUpTemp = "升温除湿";
+    private String mNoPowerControl = "无动力分控系统";
 
     @Nullable
     @Override
@@ -334,7 +335,7 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
         } else if (mTitleSpinner.getText().toString().equals(mPV)) {
             PVFragment fragment = new PVFragment();
             fragment.show(getParentFragmentManager(), "PV");
-        } else if (mTitleSpinner.getText().toString().equals(mUpTemp)) {
+        } else if (isUpTempMode(mTitleSpinner.getText().toString())) {
             UpTempFragment fragment = new UpTempFragment();
             fragment.show(getParentFragmentManager(), "upTemp");
         }
@@ -401,7 +402,7 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
                     } else if (mTitleSpinner.getText().equals(mLowTemp)) {
                         sendData = new byte[]{(byte) 0x00, (byte) 0x01};
                         termType = 1;
-                    } else if (mTitleSpinner.getText().equals(mUpTemp)) {
+                    } else if (isUpTempMode(mTitleSpinner.getText().toString())) {
                         sendData = new byte[]{(byte) 0x00, (byte) 0x03};
                         termType = 3;
                     }
@@ -413,7 +414,7 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
             }
         });
         int popupWidth = dpToPx(getContext(), 200);
-        int popupHeight = dpToPx(getContext(), 200);
+        int popupHeight = dpToPx(getContext(), 260);
         typeSelectPopup = new PopupWindow(mTypeLv, popupWidth, popupHeight, true);
 
         Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.btn_bg_common1);
@@ -432,6 +433,11 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
         testData.add(mPV);
         testData.add(mLowTemp);
         testData.add(mUpTemp);
+        testData.add(mNoPowerControl);
+    }
+
+    private boolean isUpTempMode(String value) {
+        return mUpTemp.equals(value) || mNoPowerControl.equals(value);
     }
 
     /**
