@@ -131,7 +131,6 @@
     <string name="set_humidity_title">湿度设定</string>
     <string name="set_humidity_title1">湿度回差</string>
     <string name="set_dehumidify_title">除湿设定</string>
-    <string name="set_humidify_title">加湿设定</string>
     <string name="control_humidity">控湿</string>
     <string name="humidity_control_title">湿控</string>
     <string name="humidity_company">%</string>

@@ -138,7 +138,7 @@ public class SettingTimeSetDialogFragment extends DialogFragment {
             int twoThirdsScreenWidth = (int) (screenWidth * 2.0 / 3.0);
 
             // 保持软键盘输入模式
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
             window.setLayout(twoThirdsScreenWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
             window.setGravity(Gravity.CENTER);

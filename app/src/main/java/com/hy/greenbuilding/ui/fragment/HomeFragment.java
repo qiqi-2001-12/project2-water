@@ -2301,7 +2301,7 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
                 imageTemp = "weather_mai"; // 霾 (根据文档补充)
                 break;
             default:
-                imageTemp = "weather_unknown"; // 未知
+                imageTemp = "weather_duoyun"; // 未知
                 break;
         }
         return imageTemp;

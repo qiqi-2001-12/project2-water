@@ -23,7 +23,7 @@
             android:layout_marginLeft="@dimen/hy_lay_dp_20"
             android:layout_marginTop="@dimen/hy_lay_dp_23"
             android:layout_marginBottom="@dimen/hy_lay_dp_13"
-            android:src="@drawable/image_cloudy" />
+            android:src="@drawable/weather_duoyun" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

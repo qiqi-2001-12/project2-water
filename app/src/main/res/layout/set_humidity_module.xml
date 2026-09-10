@@ -312,65 +312,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/hy_lay_dp_80"
-                android:layout_marginTop="@dimen/hy_lay_dp_50"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/set_humidify_title"
-                    android:textSize="@dimen/hy_font_sp_24"
-                    android:theme="@style/baseTextTheme1" />
-
-                <TextView
-                    android:id="@+id/tv_humidify_minus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/hy_lay_dp_73"
-                    android:background="#d8d8d8"
-                    android:padding="@dimen/hy_lay_dp_11"
-                    android:text="一"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/hy_font_sp_20" />
-
-                <com.hy.greenbuilding.ui.widget.KeyboardEditText
-                    android:id="@+id/et_humidity1"
-                    android:layout_width="@dimen/hy_lay_dp_115"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:imeOptions="flagNoExtractUi"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:paddingTop="@dimen/hy_lay_dp_0"
-                    android:paddingBottom="@dimen/hy_lay_dp_0"
-                    android:text="-"
-                    android:textColor="#3D3D3D"
-                    android:textSize="@dimen/hy_font_sp_24" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/humidity_company"
-                    android:theme="@style/baseTextTheme1" />
-
-                <TextView
-                    android:id="@+id/tv_humidify_plus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/hy_lay_dp_36"
-                    android:background="#d8d8d8"
-                    android:padding="@dimen/hy_lay_dp_11"
-                    android:text="十"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/hy_font_sp_20" />
-            </LinearLayout>
-
-
-            <LinearLayout
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

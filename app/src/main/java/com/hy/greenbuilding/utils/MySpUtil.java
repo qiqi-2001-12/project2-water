@@ -17,6 +17,7 @@ public class MySpUtil {
 
     public static String ADDRESS_NAME = "address";//设备安装地址
     public static String MAIN_CONTROL_STATUS = "control_status";//主控板状态
+    public static String OUT_TERM_UI_TYPE = "out_term_ui_type";//室外机显示类型
     public static String FAN_INIT = "fan_init";//风机参考值
     public static String FAN_DATA = "fan_data";//风机数据
     public static String TIMING_SET = "timing";//定时数据

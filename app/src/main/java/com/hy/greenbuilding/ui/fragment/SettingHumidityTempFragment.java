@@ -68,8 +68,6 @@ public class SettingHumidityTempFragment extends Fragment {
     private static final int DEFAULT_TEMP_MAX = 30;
     @BindView(R.id.et_humidity)
     KeyboardEditText humidityEdit;
-    @BindView(R.id.et_humidity1)
-    KeyboardEditText humidityEdit1;
 
     @BindView(R.id.et_tempMax)
     KeyboardEditText etTempMax;
@@ -111,10 +109,6 @@ public class SettingHumidityTempFragment extends Fragment {
     TextView tvHumidMinus;
     @BindView(R.id.tv_humid_plus)
     TextView tvHumidPlus;
-    @BindView(R.id.tv_humidify_minus)
-    TextView tvHumidifyMinus;
-    @BindView(R.id.tv_humidify_plus)
-    TextView tvHumidifyPlus;
     @BindView(R.id.tv_temperature)
     TextView tvTemperature;
 
@@ -172,14 +166,6 @@ public class SettingHumidityTempFragment extends Fragment {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     onSetDehumidifyClick(humidityEdit);
-                }
-            }
-        });
-        humidityEdit1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    onSetHumidifyClick(humidityEdit1);
                 }
             }
         });
@@ -287,11 +273,8 @@ public class SettingHumidityTempFragment extends Fragment {
         if (controlInfo == null) {
             return;
         }
-        if (humidityEdit != null && !humidityEdit.isFocused()) {
+        if (humidityEdit != null) {
             humidityEdit.setText(getDehumidifyText(controlInfo));
-        }
-        if (humidityEdit1 != null && !humidityEdit1.isFocused()) {
-            humidityEdit1.setText(String.valueOf(getHumidifyValue(controlInfo)));
         }
     }
 
@@ -301,20 +284,14 @@ public class SettingHumidityTempFragment extends Fragment {
         return String.valueOf(value);
     }
 
-    private int getHumidifyValue(SaveControlInfo controlInfo) {
-        int value = controlInfo.getHumidity1();
-        value = clamp(value, InputLimitUtil.HUMIDIFY_MIN, InputLimitUtil.HUMIDIFY_MAX);
-        return value;
-    }
-
     private void updateTempSectionText(SaveControlInfo controlInfo) {
         if (controlInfo == null) {
             return;
         }
-        if (etTempMax != null && !etTempMax.isFocused()) {
+        if (etTempMax != null) {
             etTempMax.setText(getTempMaxText(controlInfo));
         }
-        if (etTempMin != null && !etTempMin.isFocused()) {
+        if (etTempMin != null) {
             etTempMin.setText(getTempMinText(controlInfo));
         }
     }
@@ -385,11 +362,6 @@ public class SettingHumidityTempFragment extends Fragment {
         if (!TextUtils.isEmpty(settingUpdateEvent.getHumidity())) {
             int value = parseInt(settingUpdateEvent.getHumidity(), InputLimitUtil.DEHUMIDIFY_MIN);
             humidityEdit.setText(String.valueOf(clamp(value, InputLimitUtil.DEHUMIDIFY_MIN, InputLimitUtil.DEHUMIDIFY_MAX)));
-        }
-
-        if (!TextUtils.isEmpty(settingUpdateEvent.getHumidity1())) {
-            int value = parseInt(settingUpdateEvent.getHumidity1(), InputLimitUtil.HUMIDIFY_MIN);
-            humidityEdit1.setText(String.valueOf(clamp(value, InputLimitUtil.HUMIDIFY_MIN, InputLimitUtil.HUMIDIFY_MAX)));
         }
 
     }
@@ -522,55 +494,32 @@ public class SettingHumidityTempFragment extends Fragment {
             return;
         }
         humidityEdit.clearFocus();
-        humidityEdit1.clearFocus();
         humidityEdit.setText(String.valueOf(newValue));
-        sendHumiditySetting();
-    }
-
-    @OnClick({R.id.tv_humidify_minus, R.id.tv_humidify_plus})
-    public void onSetHumidifyClick(View view) {
-        String humidity1 = humidityEdit1.getText().toString();
-        int newValue = parseInt(humidity1, InputLimitUtil.HUMIDIFY_MIN);
-        if (view.getId() == R.id.tv_humidify_minus) {
-            newValue--;
-        } else if (view.getId() == R.id.tv_humidify_plus) {
-            newValue++;
-        }
-        if (!InputLimitUtil.humidifyLimit(new BigDecimal(newValue))) {
-            ToastUtil.showToast(getActivity(), getString(R.string.set_format_error));
-            onHiddenChanged(false);
-            return;
-        }
-        humidityEdit.clearFocus();
-        humidityEdit1.clearFocus();
-        humidityEdit1.setText(String.valueOf(newValue));
         sendHumiditySetting();
     }
 
     private void sendHumiditySetting() {
         String humidity = humidityEdit.getText().toString();
-        String humidity1 = humidityEdit1.getText().toString();
-        if (StringUtils.isNullOrEmpty(humidity) || StringUtils.isNullOrEmpty(humidity1)) {
+        if (StringUtils.isNullOrEmpty(humidity)) {
             return;
         }
         BigDecimal dehumidifyValue;
-        BigDecimal humidifyValue;
         try {
             dehumidifyValue = new BigDecimal(humidity);
-            humidifyValue = new BigDecimal(humidity1);
         } catch (NumberFormatException e) {
             ToastUtil.showToast(getActivity(), getString(R.string.set_format_error));
             onHiddenChanged(false);
             return;
         }
-        if (!InputLimitUtil.dehumidifyLimit(dehumidifyValue) || !InputLimitUtil.humidifyLimit(humidifyValue)) {
+        if (!InputLimitUtil.dehumidifyLimit(dehumidifyValue)) {
             ToastUtil.showToast(getActivity(), getString(R.string.set_format_error));
             onHiddenChanged(false);
             return;
         }
         ByteBuffer byteBuffer = ByteBuffer.allocate(3);
         byteBuffer.put(ByteUtils.int16ToByteArray(dehumidifyValue.intValue()));
-        byteBuffer.put((byte) humidifyValue.intValue());
+        SaveControlInfo controlInfo = MySpUtil.getControlData(getActivity());
+        byteBuffer.put((byte) (controlInfo == null ? 35 : controlInfo.getHumidity1()));
         ControlCommand controlCommand = new ControlCommand(FunctionObject.SET_HUMIDITY);
         controlCommand.setData(byteBuffer.array());
         SpDataProcessor.getInstance().send(controlCommand);
@@ -767,9 +716,6 @@ public class SettingHumidityTempFragment extends Fragment {
         if (!isVisible) {
             if (humidityEdit != null && humidityEdit.hasFocus()) {
                 humidityEdit.clearFocus();
-            }
-            if (humidityEdit1 != null && humidityEdit1.hasFocus()) {
-                humidityEdit1.clearFocus();
             }
             if (etTempMin != null && etTempMin.hasFocus()) {
                 etTempMin.clearFocus();

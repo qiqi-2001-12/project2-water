@@ -36,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Touchabl
     private TouchablePopUpWindow mPopupWindow; // 声明成员变量来持有 PopupWindow 实例
     private static final int REQUEST_WRITE_SETTINGS = 101; // 用于 onActivityResult 的请求码
     private View baseLayoutRootView;
+    private boolean keyboardShowing;
     /**
      * 注意：这里假设您的全局布局文件 ID 为 R.layout.activity_base
      */
@@ -45,7 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Touchabl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+                | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         NavigationBarStatusBar(this,true);
         setupKeyboardListener();
         boolean isCareMode = (boolean) MySpUtil.getParam(this, MySpUtil.CARE_MODE, false);
@@ -157,20 +159,22 @@ public abstract class BaseActivity extends AppCompatActivity implements Touchabl
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
+        if (hasFocus && !keyboardShowing) {
             NavigationBarStatusBar(this,true);
         }
     }
 
     public static void NavigationBarStatusBar(Activity activity, boolean hasFocus){
         if (hasFocus && Build.VERSION.SDK_INT >= 19) {
+            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
             View decorView = activity.getWindow().getDecorView();
             decorView.setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
@@ -248,6 +252,13 @@ public abstract class BaseActivity extends AppCompatActivity implements Touchabl
 
                 if (newKeyboardVisible != isKeyboardVisible) {
                     isKeyboardVisible = newKeyboardVisible;
+                    keyboardShowing = isKeyboardVisible;
+                    if (keyboardShowing) {
+                        // Do not keep fullscreen layout bounds while the IME resizes the window.
+                        activityRootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                    } else {
+                        NavigationBarStatusBar(BaseActivity.this, true);
+                    }
                     if (keyboardListener != null) {
                         keyboardListener.onKeyboardVisibilityChanged(isKeyboardVisible);
                     }

@@ -151,7 +151,7 @@ public class UpTempTestActivity extends BaseActivity {
 
     }
     private void initWindow() {
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
     }
 

@@ -2,8 +2,13 @@ package com.hy.greenbuilding.ui.fragment;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +17,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -172,6 +179,9 @@ public class FanTestDataFragment extends Fragment implements RadioGroup.OnChecke
     private View view;
     private Unbinder unbinder;
     private Context mContext;
+    private NewNestedScrollView scrollView;
+    private PopupWindow numberKeyboardPopup;
+    private EditText activeNumberEditText;
     private boolean isInit;
     public static boolean isScroll;
     private boolean isRead;
@@ -188,7 +198,7 @@ public class FanTestDataFragment extends Fragment implements RadioGroup.OnChecke
         mRg4.setOnCheckedChangeListener(this);
         isInit = true;
         initData();
-        NewNestedScrollView scrollView = view.findViewById(R.id.scrollView);
+        scrollView = view.findViewById(R.id.scrollView);
         scrollView.addScrollChangeListener(new NewNestedScrollView.AddScrollChangeListener() {
             @Override
             public void onScrollChange(int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -230,7 +240,6 @@ public class FanTestDataFragment extends Fragment implements RadioGroup.OnChecke
         etSmallPM.setOnEditorActionListener(this);
         etMiddlePM.setOnEditorActionListener(this);
         etHighPM.setOnEditorActionListener(this);
-
         return view;
     }
 
@@ -241,11 +250,220 @@ public class FanTestDataFragment extends Fragment implements RadioGroup.OnChecke
         if (unbinder != null) {
             unbinder.unbind();
         }
+        dismissNumberKeyboard();
 
     }
 
     public void initData() {
         isRead = false;
+    }
+
+    private void setupNumberInputs(EditText... editTexts) {
+        for (EditText editText : editTexts) {
+            editText.setSingleLine(true);
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            editText.setImeOptions(editText.getImeOptions()
+                    | EditorInfo.IME_ACTION_DONE
+                    | EditorInfo.IME_FLAG_NO_FULLSCREEN
+                    | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                editText.setShowSoftInputOnFocus(false);
+            }
+            editText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showNumberKeyboard((EditText) v);
+                }
+            });
+            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        showNumberKeyboard((EditText) v);
+                    }
+                }
+            });
+        }
+    }
+
+    private void showNumberKeyboard(final EditText editText) {
+        activeNumberEditText = editText;
+        hideSystemKeyboard(editText);
+        ensureNumberKeyboardPopup();
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollInputAboveNumberKeyboard(editText);
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showNumberKeyboardBelowInput(editText);
+                    }
+                }, 180);
+            }
+        });
+    }
+
+    private void ensureNumberKeyboardPopup() {
+        if (numberKeyboardPopup != null) {
+            return;
+        }
+        LinearLayout keyboard = new LinearLayout(mContext);
+        keyboard.setOrientation(LinearLayout.VERTICAL);
+        keyboard.setPadding(dp(8), dp(8), dp(8), dp(8));
+        keyboard.setBackgroundColor(Color.rgb(45, 51, 59));
+
+        String[][] keys = {
+                {"1", "2", "3"},
+                {"4", "5", "6"},
+                {"7", "8", "9"},
+                {"清空", "0", "删除"},
+                {"确定"}
+        };
+        for (String[] rowKeys : keys) {
+            LinearLayout row = new LinearLayout(mContext);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
+            if (keyboard.getChildCount() > 0) {
+                rowParams.topMargin = dp(6);
+            }
+            keyboard.addView(row, rowParams);
+
+            for (final String key : rowKeys) {
+                Button button = new Button(mContext);
+                button.setAllCaps(false);
+                button.setFocusable(false);
+                button.setText(key);
+                button.setTextColor(Color.WHITE);
+                button.setTextSize(16);
+                button.setBackgroundResource(R.drawable.btn_bg_common);
+                LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                        0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                if (row.getChildCount() > 0) {
+                    buttonParams.leftMargin = dp(6);
+                }
+                row.addView(button, buttonParams);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onNumberKeyClick(key);
+                    }
+                });
+            }
+        }
+
+        numberKeyboardPopup = new PopupWindow(keyboard, dp(240), dp(260), false);
+        numberKeyboardPopup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        numberKeyboardPopup.setOutsideTouchable(false);
+        numberKeyboardPopup.setClippingEnabled(true);
+    }
+
+    private void scrollInputAboveNumberKeyboard(EditText editText) {
+        if (scrollView == null || view == null) {
+            return;
+        }
+        int[] inputLocation = new int[2];
+        int[] rootLocation = new int[2];
+        editText.getLocationInWindow(inputLocation);
+        view.getLocationInWindow(rootLocation);
+        int keyboardHeight = dp(260);
+        int visibleBottom = rootLocation[1] + view.getHeight();
+        int targetBottom = inputLocation[1] + editText.getHeight() + keyboardHeight + dp(10);
+        int scrollDelta = targetBottom - visibleBottom;
+        if (scrollDelta > 0) {
+            scrollView.smoothScrollBy(0, scrollDelta);
+        }
+    }
+
+    private void showNumberKeyboardBelowInput(EditText editText) {
+        if (numberKeyboardPopup == null || getActivity() == null || !editText.isAttachedToWindow()) {
+            return;
+        }
+        int popupWidth = dp(240);
+        int[] location = new int[2];
+        editText.getLocationInWindow(location);
+        int rootWidth = view.getRootView().getWidth();
+        int x = Math.max(dp(8), Math.min(location[0], rootWidth - popupWidth - dp(8)));
+        int y = location[1] + editText.getHeight();
+        View decorView = getActivity().getWindow().getDecorView();
+        if (numberKeyboardPopup.isShowing()) {
+            numberKeyboardPopup.update(x, y, popupWidth, dp(260));
+        } else {
+            numberKeyboardPopup.showAtLocation(decorView, Gravity.NO_GRAVITY, x, y);
+        }
+    }
+
+    private void onNumberKeyClick(String key) {
+        if (activeNumberEditText == null) {
+            return;
+        }
+        if ("确定".equals(key)) {
+            submitNumberInput(activeNumberEditText);
+            return;
+        }
+
+        int start = Math.max(0, activeNumberEditText.getSelectionStart());
+        int end = Math.max(0, activeNumberEditText.getSelectionEnd());
+        if (start > end) {
+            int temp = start;
+            start = end;
+            end = temp;
+        }
+
+        String text = activeNumberEditText.getText().toString();
+        if ("清空".equals(key)) {
+            activeNumberEditText.setText("");
+        } else if ("删除".equals(key)) {
+            if (start != end) {
+                activeNumberEditText.getText().delete(start, end);
+            } else if (start > 0) {
+                activeNumberEditText.getText().delete(start - 1, start);
+            }
+        } else {
+            activeNumberEditText.getText().replace(start, end, key);
+        }
+        activeNumberEditText.requestFocus();
+        activeNumberEditText.invalidate();
+    }
+
+    private void submitNumberInput(EditText editText) {
+        if (editText.getId() == R.id.et_small_wind1 || editText.getId() == R.id.et_middle_wind1 || editText.getId() == R.id.et_high_wind1) {
+            onWind1BtnClick(editText);
+        } else if (editText.getId() == R.id.et_small_wind2 || editText.getId() == R.id.et_middle_wind2 || editText.getId() == R.id.et_high_wind2) {
+            onWind2BtnClick(editText);
+        } else if (editText.getId() == R.id.et_small_wind3 || editText.getId() == R.id.et_middle_wind3 || editText.getId() == R.id.et_high_wind3) {
+            onWind3BtnClick(editText);
+        } else if (editText.getId() == R.id.et_small_wind4 || editText.getId() == R.id.et_middle_wind4 || editText.getId() == R.id.et_high_wind4) {
+            onWind4BtnClick(editText);
+        } else if (editText.getId() == R.id.et_small_co2 || editText.getId() == R.id.et_middle_co2 || editText.getId() == R.id.et_high_co2) {
+            onCo2SetClick(editText);
+        } else if (editText.getId() == R.id.et_small_pm || editText.getId() == R.id.et_middle_pm || editText.getId() == R.id.et_high_pm) {
+            onPmSetClick(editText);
+        }
+        dismissNumberKeyboard();
+        editText.clearFocus();
+    }
+
+    private void dismissNumberKeyboard() {
+        if (numberKeyboardPopup != null && numberKeyboardPopup.isShowing()) {
+            numberKeyboardPopup.dismiss();
+        }
+        activeNumberEditText = null;
+    }
+
+    private void hideSystemKeyboard(View target) {
+        if (mContext == null || target == null) {
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
+        }
+    }
+
+    private int dp(int value) {
+        return (int) (value * getResources().getDisplayMetrics().density + 0.5f);
     }
 
     /**
@@ -729,7 +947,7 @@ public class FanTestDataFragment extends Fragment implements RadioGroup.OnChecke
             hideKeyboardAndClearFocus(v); // 隐藏键盘+失去焦点
             return true;
         }else if (v.getId() == R.id.et_small_pm || v.getId() == R.id.et_middle_pm || v.getId() == R.id.et_high_pm) {
-            onCo2SetClick(v);
+            onPmSetClick(v);
             hideKeyboardAndClearFocus(v); // 隐藏键盘+失去焦点
             return true;
         }
