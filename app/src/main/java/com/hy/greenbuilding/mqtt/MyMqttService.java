@@ -59,6 +59,9 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -84,6 +87,11 @@ public class MyMqttService extends Service {
     private static String passWord_green = "test";
     private static MqttClient client_green;
     private static MqttConnectOptions conOpt_green;
+    private static volatile MyMqttService serviceInstance;
+    private static ExecutorService mqttExecutor;
+    private static final Object MQTT_EXECUTOR_LOCK = new Object();
+    private static final AtomicBoolean connectTaskScheduled = new AtomicBoolean(false);
+    private volatile boolean serviceDestroyed;
 
     private static final int DELAY_TIME1 = 60 * 1000;
     private static final int DELAY_TIME2 = 5 * 1000;
@@ -98,12 +106,15 @@ public class MyMqttService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        serviceInstance = this;
+        serviceDestroyed = false;
         mContext = this;
         mHandler = new Handler(Looper.getMainLooper());
 
         // 提前初始化，保证 reConnect 调用时对象不为 null
         initMqtt();
         initGreenMqtt();
+        doClientConnection();
     }
 
 
@@ -117,9 +128,11 @@ public class MyMqttService extends Service {
         try {
             client = new MqttClient(uri, "hy_1_" + PackageUtil.getSerialNumber(), new MemoryPersistence());
         } catch (MqttException e) {
-            e.printStackTrace();
+            Log.e("service", "create ota mqtt client failed", e);
         }
-        client.setCallback(mqttCallback);
+        if (client != null) {
+            client.setCallback(mqttCallback);
+        }
         conOpt = new MqttConnectOptions();
         conOpt.setCleanSession(true);
         //设置自动重连
@@ -128,7 +141,6 @@ public class MyMqttService extends Service {
         conOpt.setKeepAliveInterval(15);
         conOpt.setUserName(userName);
         conOpt.setPassword(passWord.toCharArray());
-        doClientConnection();
     }
 
     private void initGreenMqtt() {
@@ -136,9 +148,11 @@ public class MyMqttService extends Service {
         try {
             client_green = new MqttClient(uri, "hy_1_" + PackageUtil.getSerialNumber(), new MemoryPersistence());
         } catch (MqttException e) {
-            e.printStackTrace();
+            Log.e("service", "create green mqtt client failed", e);
         }
-        client_green.setCallback(callbackGreen);
+        if (client_green != null) {
+            client_green.setCallback(callbackGreen);
+        }
         conOpt_green = new MqttConnectOptions();
         conOpt_green.setHttpsHostnameVerificationEnabled(false);//不认证证书
         //设置自动重连
@@ -212,59 +226,75 @@ public class MyMqttService extends Service {
 
     //错误日志上报到ota服务器
     public static void logsReport(String errorMsg) {
-        if (System.currentTimeMillis() - currentTime < 60 * 1000) {
-            return;
-        }
-        currentTime = System.currentTimeMillis();
-        LogsReportUploadInfo uploadInfo = new LogsReportUploadInfo();
-        uploadInfo.setIp_addr(NetworkStatus.getLocalIpAddress(mContext));
-        SaveAddress saveAddress = MySpUtil.getAddress(mContext);
-        if (StringUtils.isNullOrEmpty(saveAddress.getCityName())) {
-            uploadInfo.setDevice_addr("");
-        } else {
-            String address = saveAddress.getProvinceName() + saveAddress.getCityName() + saveAddress.getAddressDetail();
-            uploadInfo.setDevice_addr(address);
-        }
-        uploadInfo.setApp_version(PackageUtil.getVersion(mContext));
-        uploadInfo.setClient_id("hy_1_" + PackageUtil.getSerialNumber());
-        uploadInfo.setControl_version(HyApplication.getControlVersion());
-        uploadInfo.setDevice_code(PackageUtil.getSerialNumber());
-        uploadInfo.setDevice_type(1);
-        uploadInfo.setTimestamp(StringUtils.simpleDateFormat.format(new Date()));
-        uploadInfo.setVendor_id("1");
-        uploadInfo.setLog_type(1);
-        uploadInfo.setMsg(errorMsg);
-        String topic = "devices/logReport/client_id/" + mClientId;
-        String json = new Gson().toJson(uploadInfo);
         try {
-            if (client != null && client.isConnected() && json != null) {
-                client.publish(topic, json.getBytes(), 0, false);
-                //client.publish(topic, json.getBytes(), 0, false, null, null);
+            if (mContext == null || System.currentTimeMillis() - currentTime < 60 * 1000) {
+                return;
             }
-        } catch (MqttException e) {
-            e.printStackTrace();
+            currentTime = System.currentTimeMillis();
+            LogsReportUploadInfo uploadInfo = new LogsReportUploadInfo();
+            uploadInfo.setIp_addr(NetworkStatus.getLocalIpAddress(mContext));
+            SaveAddress saveAddress = MySpUtil.getAddress(mContext);
+            if (saveAddress == null || StringUtils.isNullOrEmpty(saveAddress.getCityName())) {
+                uploadInfo.setDevice_addr("");
+            } else {
+                String address = saveAddress.getProvinceName() + saveAddress.getCityName() + saveAddress.getAddressDetail();
+                uploadInfo.setDevice_addr(address);
+            }
+            uploadInfo.setApp_version(PackageUtil.getVersion(mContext));
+            uploadInfo.setClient_id("hy_1_" + PackageUtil.getSerialNumber());
+            uploadInfo.setControl_version(HyApplication.getControlVersion());
+            uploadInfo.setDevice_code(PackageUtil.getSerialNumber());
+            uploadInfo.setDevice_type(1);
+            uploadInfo.setTimestamp(StringUtils.simpleDateFormat.format(new Date()));
+            uploadInfo.setVendor_id("1");
+            uploadInfo.setLog_type(1);
+            uploadInfo.setMsg(errorMsg);
+            String topic = "devices/logReport/client_id/" + mClientId;
+            String json = new Gson().toJson(uploadInfo);
+            if (client != null && client.isConnected()) {
+                client.publish(topic, json.getBytes(), 0, false);
+            }
+        } catch (Exception e) {
+            Log.w("service", "unable to report crash log", e);
         }
     }
 
     @Override
     public void onDestroy() {
+        serviceDestroyed = true;
+        if (serviceInstance == this) {
+            serviceInstance = null;
+        }
         try {
             if (client != null && client.isConnected()) {
                 client.disconnect();
-                client = null;
             }
+        } catch (Exception e) {
+            Log.w("service", "disconnect ota mqtt failed", e);
+        } finally {
+            client = null;
+        }
+        try {
             if (client_green != null && client_green.isConnected()) {
                 client_green.disconnect();
-                client_green = null;
             }
-        } catch (MqttException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.w("service", "disconnect green mqtt failed", e);
+        } finally {
+            client_green = null;
         }
         if (mHandler != null) {
             mHandler.removeCallbacks(mRunnable);
         }
         if (handler1 != null) {
             handler1.removeCallbacks(runnable1);
+        }
+        synchronized (MQTT_EXECUTOR_LOCK) {
+            if (mqttExecutor != null) {
+                mqttExecutor.shutdownNow();
+                mqttExecutor = null;
+            }
+            connectTaskScheduled.set(false);
         }
         stopSelf();
         super.onDestroy();
@@ -274,14 +304,63 @@ public class MyMqttService extends Service {
      * 连接MQTT服务器
      */
     private void doClientConnection() {
+        scheduleMqttConnection();
+    }
+
+    private static ExecutorService getMqttExecutor() {
+        synchronized (MQTT_EXECUTOR_LOCK) {
+            if (mqttExecutor == null || mqttExecutor.isShutdown()) {
+                mqttExecutor = Executors.newSingleThreadExecutor();
+            }
+            return mqttExecutor;
+        }
+    }
+
+    /** Connect off the main thread so an unavailable broker cannot freeze the UI. */
+    private void scheduleMqttConnection() {
+        if (serviceDestroyed || !connectTaskScheduled.compareAndSet(false, true)) {
+            return;
+        }
+        try {
+            getMqttExecutor().execute(() -> {
+                try {
+                    if (serviceDestroyed) {
+                        return;
+                    }
+                    if (!isConnectIsNormal()) {
+                        Log.i("service", "MQTT skipped: no available network");
+                        scheduleRetry();
+                        return;
+                    }
+                    connectClients();
+                } catch (Exception e) {
+                    Log.e("service", "MQTT connection task failed", e);
+                    scheduleRetry();
+                } finally {
+                    connectTaskScheduled.set(false);
+                }
+            });
+        } catch (Exception e) {
+            connectTaskScheduled.set(false);
+            Log.e("service", "unable to schedule MQTT connection", e);
+        }
+    }
+
+    private static void scheduleRetry() {
+        if (mHandler != null && serviceInstance != null && !serviceInstance.serviceDestroyed) {
+            mHandler.removeCallbacks(mRunnable);
+            mHandler.postDelayed(mRunnable, DELAY_TIME1);
+        }
+    }
+
+    private void connectClients() {
         // 1. 检查 client 是否已经初始化
         if (client != null) {
             if (!client.isConnected()) {
                 try {
                     client.connect(conOpt);
                     hyMqttConnectSuccess();
-                } catch (MqttException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
                     Log.i("service", "hy ota mqtt connect error---" + e);
                     hyMqttConnectError();
                 }
@@ -296,8 +375,7 @@ public class MyMqttService extends Service {
                 try {
                     client_green.connect(conOpt_green);
                     greenMqttConnectSuccess();
-                } catch (MqttException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
                     Log.i("service", "green ota mqtt connect error---" + e);
                     greenMqttConnectError();
                 }
@@ -318,25 +396,11 @@ public class MyMqttService extends Service {
         if (!isConnect) {
             return;
         }
-        if (client != null && !client.isConnected()) {
-            try {
-                client.connect(conOpt);
-                hyMqttConnectSuccess();
-            } catch (MqttException e) {
-                e.printStackTrace();
-                Log.i("service", "hy ota mqtt connect error---" + e);
-                hyMqttConnectError();
-            }
-        }
-        if (client_green != null && !client_green.isConnected()) {
-            try {
-                client_green.connect(conOpt_green);
-                greenMqttConnectSuccess();
-            } catch (MqttException e) {
-                e.printStackTrace();
-                Log.i("service", "green ota mqtt connect error---" + e);
-                greenMqttConnectError();
-            }
+        MyMqttService service = serviceInstance;
+        if (service != null) {
+            service.scheduleMqttConnection();
+        } else {
+            Log.w("service", "MQTT reconnect skipped: service is not running");
         }
     }
 
@@ -423,9 +487,19 @@ public class MyMqttService extends Service {
     static Runnable runnable1 = new Runnable() {
         @Override
         public void run() {
-            MqttUploadManager.getInstance().uploadData();
-            handler1.removeCallbacks(runnable1);
-            handler1.postDelayed(runnable1, DELAY_TIME2);
+            try {
+                if (serviceInstance == null || serviceInstance.serviceDestroyed) {
+                    return;
+                }
+                MqttUploadManager.getInstance().uploadData();
+            } catch (Exception e) {
+                Log.e("service", "periodic MQTT upload failed", e);
+            } finally {
+                if (serviceInstance != null && !serviceInstance.serviceDestroyed) {
+                    handler1.removeCallbacks(runnable1);
+                    handler1.postDelayed(runnable1, DELAY_TIME2);
+                }
+            }
         }
     };
     static Handler mHandler = new Handler(Looper.getMainLooper());
@@ -439,35 +513,47 @@ public class MyMqttService extends Service {
     private MqttCallback mqttCallback = new MqttCallback() {
         @Override
         public void messageArrived(String topic, MqttMessage message) throws Exception {
-            Log.i("service", "--messageArrived---" + topic);
-            String str1 = new String(message.getPayload());
-            if (topic != null && topic.contains("status_change_notify")) {
+            try {
+                if (message == null) {
+                    return;
+                }
+                Log.i("service", "--messageArrived---" + topic);
+                String str1 = new String(message.getPayload());
+                if (topic != null && topic.contains("status_change_notify")) {
                 //启用/禁用
                 MqttStatusResponseInfo info = new Gson().fromJson(str1, MqttStatusResponseInfo.class);
-                if (info.getDevice_code().equals(PackageUtil.getSerialNumber())) {
+                if (info != null && PackageUtil.getSerialNumber().equals(info.getDevice_code())) {
                     if (info.getStatus() == 0) {
-                        IGetMessageCallBack.sendOtaStatus(true);
+                        if (IGetMessageCallBack != null) {
+                            IGetMessageCallBack.sendOtaStatus(true);
+                        }
                     } else {
-                        IGetMessageCallBack.sendOtaStatus(false);
+                        if (IGetMessageCallBack != null) {
+                            IGetMessageCallBack.sendOtaStatus(false);
+                        }
                     }
                 }
-            } else {
+                } else {
                 //升级
                 MqttResponseInfo responseInfo = new Gson().fromJson(str1, MqttResponseInfo.class);
+                if (responseInfo == null) {
+                    return;
+                }
                 appUrl = responseInfo.getApp_url();
                 appVersion = responseInfo.getApp_version();
                 controlVersion = responseInfo.getControl_version();
                 controlUrl = responseInfo.getControl_url();
-                if (!controlUrl.equals("")) {
+                if (!StringUtils.isNullOrEmpty(controlUrl)) {
                     downFile(controlUrl, controlVersion, 1);
                 } else {
-                    if (!appUrl.equals("")) {
+                    if (!StringUtils.isNullOrEmpty(appUrl)) {
                         downFile(appUrl, appVersion, 2);
                     }
                 }
+                }
+            } catch (Exception e) {
+                Log.e("service", "invalid OTA MQTT message", e);
             }
-
-
         }
 
         @Override
@@ -478,7 +564,7 @@ public class MyMqttService extends Service {
 
         @Override
         public void connectionLost(Throwable arg0) {
-            Log.i("service", "ota connectionLost---" + arg0.toString());
+            Log.i("service", "ota connectionLost---" + String.valueOf(arg0));
             if (mHandler != null) {
                 mHandler.removeCallbacks(mRunnable);
                 mHandler.postDelayed(mRunnable, DELAY_TIME1);
@@ -489,9 +575,14 @@ public class MyMqttService extends Service {
     private MqttCallback callbackGreen = new MqttCallback() {
         @Override
         public void messageArrived(String topic, MqttMessage message) throws Exception {
+            if (message == null || mHandler == null) {
+                return;
+            }
             mHandler.post(() -> {
                 try {
-                    IGetMessageCallBack.sendMessage3(message.getPayload());
+                    if (IGetMessageCallBack != null) {
+                        IGetMessageCallBack.sendMessage3(message.getPayload());
+                    }
                 } catch (Exception e) {
                     Log.e("service", "12green connectionLost---: " + e.toString());
                     e.printStackTrace();
@@ -508,7 +599,7 @@ public class MyMqttService extends Service {
 
         @Override
         public void connectionLost(Throwable arg0) {
-            Log.i("service", "green connectionLost---" + arg0.toString());
+            Log.i("service", "green connectionLost---" + String.valueOf(arg0));
             if (mHandler != null) {
                 mHandler.removeCallbacks(mRunnable);
                 mHandler.postDelayed(mRunnable, DELAY_TIME1);
@@ -522,8 +613,8 @@ public class MyMqttService extends Service {
     private boolean isConnectIsNormal() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
-        if (info != null && info.isAvailable()) {
+        NetworkInfo info = connectivityManager == null ? null : connectivityManager.getActiveNetworkInfo();
+        if (info != null && info.isAvailable() && info.isConnected()) {
             String name = info.getTypeName();
             Log.i("service", "MQTT当前网络名称：" + name);
             return true;
@@ -549,14 +640,20 @@ public class MyMqttService extends Service {
                             if (!StringUtils.isNullOrEmpty(appUrl)) {
                                 downFile(appUrl, appVersion, 2);
                             } else {
-                                IGetMessageCallBack.setMessage(controlVersion);
+                                if (IGetMessageCallBack != null) {
+                                    IGetMessageCallBack.setMessage(controlVersion);
+                                }
                             }
                         } else {//APK文件下载成功
                             if (!StringUtils.isNullOrEmpty(controlUrl)) {
-                                IGetMessageCallBack.setMessage(controlVersion);
-                                IGetMessageCallBack.setMessage2(appVersion);
+                                if (IGetMessageCallBack != null) {
+                                    IGetMessageCallBack.setMessage(controlVersion);
+                                    IGetMessageCallBack.setMessage2(appVersion);
+                                }
                             } else {
-                                IGetMessageCallBack.setMessage1(appVersion);
+                                if (IGetMessageCallBack != null) {
+                                    IGetMessageCallBack.setMessage1(appVersion);
+                                }
                             }
                         }
                     }

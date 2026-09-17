@@ -46,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Touchabl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
                 | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         NavigationBarStatusBar(this,true);
         setupKeyboardListener();
@@ -160,6 +160,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Touchabl
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && !keyboardShowing) {
+            // Subclasses historically reset this to ADJUST_RESIZE in onCreate.
+            // Panning keeps the focused field visible in the fixed landscape layouts.
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
+                    | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
             NavigationBarStatusBar(this,true);
         }
     }
@@ -253,10 +257,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Touchabl
                 if (newKeyboardVisible != isKeyboardVisible) {
                     isKeyboardVisible = newKeyboardVisible;
                     keyboardShowing = isKeyboardVisible;
-                    if (keyboardShowing) {
-                        // Do not keep fullscreen layout bounds while the IME resizes the window.
-                        activityRootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-                    } else {
+                    if (!keyboardShowing) {
                         NavigationBarStatusBar(BaseActivity.this, true);
                     }
                     if (keyboardListener != null) {
