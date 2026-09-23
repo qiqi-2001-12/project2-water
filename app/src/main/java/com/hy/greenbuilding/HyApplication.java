@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.WindowManager;
 
 import com.hy.greenbuilding.protocol.SpDataProcessor;
+import com.hy.greenbuilding.modbus.AppSerialModbusTransport;
+import com.hy.greenbuilding.modbus.ModbusRtuManager;
+import com.hy.greenbuilding.modbus.WaterUnitPollingController;
 import com.hy.greenbuilding.utils.Hex;
 import com.hy.greenbuilding.utils.OtherExceptionsHandler;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -55,6 +58,10 @@ public class HyApplication extends Application {
         }
 
         SpDataProcessor.getInstance().init();
+        ModbusRtuManager.getInstance().setTransport(new AppSerialModbusTransport());
+        // 新水机通讯须由后续管理员配置页显式开启，应用启动时绝不主动轮询或写入。
+        ModbusRtuManager.getInstance().setCommunicationEnabled(false);
+        WaterUnitPollingController.getInstance().start();
         OtherExceptionsHandler.getInstance().init(this);
 
         screenH = getWindowPixle(this)[1];

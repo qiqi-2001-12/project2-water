@@ -229,6 +229,32 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/li_water_unit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hy_lay_dp_80"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/hy_lay_dp_16"
+                android:background="@drawable/manager_button_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/hy_lay_dp_30"
+                android:paddingEnd="@dimen/hy_lay_dp_30">
+
+                <ImageView
+                    android:layout_width="@dimen/hy_lay_dp_50"
+                    android:layout_height="@dimen/hy_lay_dp_50"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/set_address_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hy_lay_dp_50"
+                    android:text="水机管理"
+                    android:theme="@style/baseTextTheme1" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/li_gateway"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hy_lay_dp_80"

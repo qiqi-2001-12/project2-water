@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F0EA"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/hy_lay_dp_15"
+    android:paddingEnd="@dimen/hy_lay_dp_15"
+    android:paddingBottom="@dimen/hy_lay_dp_15">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/water_unit_back"
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:contentDescription="返回"
+            android:padding="16dp"
+            android:src="@drawable/icon_return"
+            android:tint="#000000" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/water_unit_tabs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#8B6D55"
+            app:tabIndicatorHeight="5dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="#6E5540"
+            app:tabTextColor="#8A786B"
+            app:tabTextAppearance="@style/WaterUnitPrimaryTabText" />
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/water_unit_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

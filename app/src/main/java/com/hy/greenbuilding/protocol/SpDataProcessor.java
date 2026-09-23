@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.hy.greenbuilding.HyApplication;
+import com.hy.greenbuilding.modbus.ModbusRtuManager;
 import com.hy.greenbuilding.event.FanErrorEvent;
 import com.hy.greenbuilding.event.FanResetEvent;
 import com.hy.greenbuilding.event.FunctionTestEvent;
@@ -42,6 +43,8 @@ import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 接收串口数据
@@ -74,6 +77,7 @@ public class SpDataProcessor {
                 // 全部抛到单工作线程，不阻塞主线程
                 mSerialHandler.post(() -> {
                     try {
+                        ModbusRtuManager.getInstance().onSerialBytes(paramComBean);
                         ensureCapacity(bufferLen + paramComBean.length);
                         System.arraycopy(paramComBean, 0, buffer, bufferLen, paramComBean.length);
                         bufferLen += paramComBean.length;
@@ -602,6 +606,8 @@ public class SpDataProcessor {
 
     // 添加同步锁对象
     private final Object sendLock = new Object();
+    /** 自定义协议与 Modbus 共用主机串口时，Modbus 请求-响应期间独占总线。 */
+    private final ReentrantLock serialBusLock = new ReentrantLock(true);
 
     /**
      * 发送串口命令
@@ -648,29 +654,81 @@ public class SpDataProcessor {
 
     // 处理单个命令（原 send 方法的核心逻辑）
     private void processCommand(SpCommand spCommand) {
-        synchronized (sendLock) {
-            if (mSerialHelper.isOpen() && spCommand != null) {
-                if (!isUpdate) {
+        serialBusLock.lock();
+        try {
+            synchronized (sendLock) {
+                if (mSerialHelper.isOpen() && spCommand != null) {
+                    if (!isUpdate) {
                     // --- 添加这行日志 ---
 //                    Log.i("QueueTest", ">>> 实际执行发送，优先级为: " + spCommand.priority);
 //                    Log.d("SpDataProcessor", "正在发送指令: " + Hex.bytesToHexString(spCommand.getBytes()) + " | 优先级: " + spCommand.priority+ " | 功能id: " + spCommand.functionId);
 
-                    mSerialHelper.send(spCommand.getBytes());
-                    if (spCommand.priority < 5) {
+                        mSerialHelper.send(spCommand.getBytes());
+                        if (spCommand.priority < 5) {
                         // 高优先级指令（如恢复出厂、OTA）通常需要更多处理时间
-                        SystemClock.sleep(120);
-                    } else {
+                            SystemClock.sleep(120);
+                        } else {
                         // 普通指令间隔
-                        SystemClock.sleep(50);
+                            SystemClock.sleep(50);
+                        }
                     }
 //                    SystemClock.sleep(50);
 //                    SystemClock.sleep(100);
                 }
             }
+        } finally {
+            serialBusLock.unlock();
         }
     }
 
     // 修改 send 方法为入队操作
+    /** 为水机 Modbus 的一次请求-响应事务独占主机串口。 */
+    public boolean beginModbusTransaction(long waitTimeoutMs) {
+        try {
+            return serialBusLock.tryLock(waitTimeoutMs, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException interruptedException) {
+            Thread.currentThread().interrupt();
+            return false;
+        }
+    }
+
+    /** 仅允许持有 Modbus 事务锁的线程发送原始 Modbus RTU 帧。 */
+    public boolean sendModbusFrame(byte[] frame) {
+        if (frame == null || !serialBusLock.isHeldByCurrentThread()) {
+            return false;
+        }
+        synchronized (sendLock) {
+            if (!mSerialHelper.isOpen()) {
+                return false;
+            }
+            mSerialHelper.send(frame);
+            return true;
+        }
+    }
+
+    public void endModbusTransaction() {
+        if (serialBusLock.isHeldByCurrentThread()) {
+            serialBusLock.unlock();
+        }
+    }
+
+    /** OTA 等直接发送路径也必须与 Modbus 事务使用同一把总线锁。 */
+    private void sendCustomFrameImmediately(byte[] frame) {
+        if (frame == null) {
+            return;
+        }
+        serialBusLock.lock();
+        try {
+            synchronized (sendLock) {
+                if (mSerialHelper.isOpen()) {
+                    mSerialHelper.send(frame);
+                }
+            }
+        } finally {
+            serialBusLock.unlock();
+        }
+    }
+
     public void send(SpCommand spCommand) {
         if (spCommand == null) {
 //            Log.i("info", "Null command, skip enqueue");
@@ -692,7 +750,7 @@ public class SpDataProcessor {
     public void send1(OTARequestCommand command) {
         if (mSerialHelper.isOpen() && command != null) {
 //            Log.i("info", "send ota = " + Hex.bytesToHexString(command.getBytes1()));
-            mSerialHelper.send(command.getBytes1());
+            sendCustomFrameImmediately(command.getBytes1());
         }
     }
 
@@ -705,7 +763,7 @@ public class SpDataProcessor {
         if (mSerialHelper.isOpen() && command != null) {
             isUpdate = true;
             byte[] bytes = command.getBytes2();
-            mSerialHelper.send(bytes);
+            sendCustomFrameImmediately(bytes);
         }
     }
 
@@ -718,7 +776,7 @@ public class SpDataProcessor {
         if (mSerialHelper.isOpen() && command != null) {
             if (!isUpdate) {
                 byte[] bytes = command.getBytes3();
-                mSerialHelper.send(bytes);
+                sendCustomFrameImmediately(bytes);
                 SystemClock.sleep(120);
             }
         }
@@ -729,7 +787,7 @@ public class SpDataProcessor {
             if (!isUpdate) {
                 byte[] bytes = command.getBytes4();
 //                Log.i("info", "通用数据 = " + Hex.bytesToHexString(bytes));
-                mSerialHelper.send(bytes);
+                sendCustomFrameImmediately(bytes);
                 SystemClock.sleep(120);
             }
         }

@@ -67,6 +67,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            // 模拟机测试包：避免与设备中的 system UID 正式包发生签名冲突。
+            applicationIdSuffix ".testx86"
             minifyEnabled false
             debuggable true
             buildConfigField "boolean", "LOG_DEBUG", "true"

@@ -32,6 +32,7 @@ import com.hy.greenbuilding.ui.fragment.LowTempFragment;
 import com.hy.greenbuilding.ui.fragment.PVFragment;
 import com.hy.greenbuilding.ui.fragment.UpTempFragment;
 import com.hy.greenbuilding.ui.fragment.ValveSettingFragment;
+import com.hy.greenbuilding.ui.fragment.WaterUnitFragment;
 import com.hy.greenbuilding.utils.AppManagerUtil;
 import com.hy.greenbuilding.utils.InputLimitUtil;
 import com.hy.greenbuilding.utils.MySpUtil;
@@ -199,6 +200,15 @@ public class ManagerActivity extends BaseActivity {
         Intent intent = new Intent(ManagerActivity.this, MainGatewayActivity.class);
         intent.putExtra("main", "2");
         startActivity(intent);
+    }
+
+    @OnClick(R.id.li_water_unit)
+    public void onWaterUnitClick(View view) {
+        if (InputLimitUtil.isFastDoubleClick()) {
+            return;
+        }
+        WaterUnitFragment fragment = new WaterUnitFragment();
+        fragment.show(getSupportFragmentManager(), "waterUnit");
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

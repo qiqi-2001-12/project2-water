@@ -349,6 +349,15 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
         }
     }
 
+    @OnClick(R.id.li_water_unit)
+    public void onWaterUnitClick(View view) {
+        if (InputLimitUtil.isFastDoubleClick()) {
+            return;
+        }
+        WaterUnitFragment fragment = new WaterUnitFragment();
+        fragment.show(getParentFragmentManager(), "waterUnit");
+    }
+
     @OnClick(R.id.li_gateway)
     public void onGatewayClick(View view) {
         if (InputLimitUtil.isFastDoubleClick() || getContext() == null) {
