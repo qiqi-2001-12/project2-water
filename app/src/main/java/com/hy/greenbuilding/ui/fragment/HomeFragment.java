@@ -78,6 +78,7 @@ import com.hy.greenbuilding.mqtt.HyServiceConnection;
 import com.hy.greenbuilding.mqtt.IGetMessageCallBack;
 import com.hy.greenbuilding.mqtt.MqttUploadManager;
 import com.hy.greenbuilding.mqtt.MyMqttService;
+import com.hy.greenbuilding.modbus.WaterUnitControl;
 import com.hy.greenbuilding.protocol.FunctionObject;
 import com.hy.greenbuilding.protocol.ResPonseInfo.CO2StatusInfo;
 import com.hy.greenbuilding.protocol.ResPonseInfo.CustomDataInfo;
@@ -974,6 +975,11 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
             }
         }
         sendManualCommand(false);
+        if (view.getId() == R.id.ll_heating) {
+            WaterUnitControl.setMode(WaterUnitControl.MODE_HEATING);
+        } else {
+            WaterUnitControl.setMode(WaterUnitControl.MODE_COOLING);
+        }
 
 
         if (!mCircleSwitch.isSelected() && circleStatus == 0) {
@@ -1077,6 +1083,7 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
             MySpUtil.setParam(getContext(), MySpUtil.TEMP_SWITCH, event.isChecked());
         }
         mTempSwitch = event.isChecked();
+        WaterUnitControl.setPower(event.isChecked());
         Log.e("TAG", "onTempSwitchStatusChange: " + new Gson().toJson(event) + "===========" + circleStatus);
         if (event.isChecked()) {
             //打开调温时，开启内循环
@@ -2821,6 +2828,7 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
 
     private void setTempMode(int mode, int defrost, int delayProtect) {
         mTempSwitch = mode == 0 ? false : true;
+        WaterUnitControl.setPower(mTempSwitch);
         if (mTempSwitch) {
             hdTopic.setAirSwitch((byte) 0x01);
         } else {
@@ -2845,18 +2853,21 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
             mTempModeBg.setVisibility(View.GONE);
             mTempModeView.setVisibility(View.INVISIBLE);
         } else if (mode == 1 && !HyApplication.isForceFlu()) {
+            WaterUnitControl.setMode(WaterUnitControl.MODE_COOLING);
             mTempModeBg.setVisibility(View.VISIBLE);
             mTempModeView.setVisibility(View.VISIBLE);
             mTempModeBg.setImageResource(R.drawable.select_refrigeration);
             mTempModeView.setText("制冷");
             hdTopic.setAirMode((byte) 0x00);
         } else if (mode == 2 && !HyApplication.isForceFlu()) {
+            WaterUnitControl.setMode(WaterUnitControl.MODE_HEATING);
             mTempModeBg.setVisibility(View.VISIBLE);
             mTempModeView.setVisibility(View.VISIBLE);
             mTempModeBg.setImageResource(R.drawable.select_heating);
             mTempModeView.setText("制热");
             hdTopic.setAirMode((byte) 0x01);
         } else if (mode == 4 && !HyApplication.isForceFlu()) {
+            WaterUnitControl.setMode(WaterUnitControl.MODE_COOLING);
             mTempModeBg.setVisibility(View.VISIBLE);
             mTempModeView.setVisibility(View.VISIBLE);
             mTempModeBg.setImageResource(R.drawable.select_dehumidification);

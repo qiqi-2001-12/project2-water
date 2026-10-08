@@ -58,7 +58,7 @@ public class WaterUnitFragment extends BaseDialogFragment {
     }
 
     private static class WaterUnitPagerAdapter extends FragmentPagerAdapter {
-        private static final String[] TITLES = {"状态参数", "设置信息"};
+        private static final String[] TITLES = {"状态参数", "设置信息", "故障查询"};
 
         WaterUnitPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -66,6 +66,9 @@ public class WaterUnitFragment extends BaseDialogFragment {
 
         @Override
         public Fragment getItem(int position) {
+            if (position == 2) {
+                return new WaterUnitFaultFragment();
+            }
             return WaterUnitCategoryFragment.newInstance(position == 0);
         }
 

@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.hy.greenbuilding.protocol.SpDataProcessor;
 import com.hy.greenbuilding.modbus.AppSerialModbusTransport;
 import com.hy.greenbuilding.modbus.ModbusRtuManager;
+import com.hy.greenbuilding.modbus.WaterUnitFaultHistoryStore;
 import com.hy.greenbuilding.modbus.WaterUnitPollingController;
 import com.hy.greenbuilding.utils.Hex;
 import com.hy.greenbuilding.utils.OtherExceptionsHandler;
@@ -58,9 +59,12 @@ public class HyApplication extends Application {
         }
 
         SpDataProcessor.getInstance().init();
+        WaterUnitFaultHistoryStore.getInstance().initialize(this);
         ModbusRtuManager.getInstance().setTransport(new AppSerialModbusTransport());
         // 新水机通讯须由后续管理员配置页显式开启，应用启动时绝不主动轮询或写入。
-        ModbusRtuManager.getInstance().setCommunicationEnabled(false);
+        // ModbusSlave 联调阶段：允许水机状态自动轮询。
+        // 真实水机接入转换器后保持主控侧 115200/8N1，由转换器转换为从站侧 9600/8N1。
+        ModbusRtuManager.getInstance().setCommunicationEnabled(true);
         WaterUnitPollingController.getInstance().start();
         OtherExceptionsHandler.getInstance().init(this);
 

@@ -32,6 +32,7 @@ import com.hy.greenbuilding.event.TempSwitchUpdateEvent;
 import com.hy.greenbuilding.model.RoomInfo;
 import com.hy.greenbuilding.mqtt.HDTopic;
 import com.hy.greenbuilding.mqtt.MqttUploadManager;
+import com.hy.greenbuilding.modbus.WaterUnitControl;
 import com.hy.greenbuilding.protocol.FunctionObject;
 import com.hy.greenbuilding.protocol.ResPonseInfo.CustomDataInfo;
 import com.hy.greenbuilding.protocol.ResPonseInfo.EnvironmentDataInfo;
@@ -258,6 +259,7 @@ public class SettingHumidityTempFragment extends Fragment {
                 }
                 if (!eventMode) {
                     EventBus.getDefault().post(new TempSwitchEvent(isChecked));
+                    WaterUnitControl.setPower(isChecked);
                 } else {
                     compoundButton.setChecked(!isChecked);
                     // 弹出提示 (可选)

@@ -61,7 +61,7 @@ public class WaterUnitCategoryFragment extends Fragment {
             }
             TextView label = new TextView(requireContext());
             label.setText(tab.getText());
-            label.setTextSize(22);
+            label.setTextSize(tabLayout.getTabCount() > 3 ? 18 : 22);
             label.setTextColor(tabLayout.getTabTextColors());
             label.setGravity(android.view.Gravity.CENTER);
             label.setSingleLine(true);

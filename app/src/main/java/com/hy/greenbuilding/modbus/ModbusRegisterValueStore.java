@@ -26,6 +26,11 @@ public final class ModbusRegisterValueStore {
         for (int index = 0; index < registerValues.length; index++) {
             values.put(startAddress + index, registerValues[index]);
         }
+        int endAddress = startAddress + registerValues.length - 1;
+        if (startAddress <= WaterUnitRegisterMap.STATUS_FAULT_INFO_5_ADDRESS
+                && endAddress >= WaterUnitRegisterMap.STATUS_FAULT_INFO_8_ADDRESS) {
+            WaterUnitFaultHistoryStore.getInstance().update(new HashMap<>(values));
+        }
         EventBus.getDefault().post(new ModbusRegistersUpdatedEvent(startAddress, registerValues.length));
     }
 

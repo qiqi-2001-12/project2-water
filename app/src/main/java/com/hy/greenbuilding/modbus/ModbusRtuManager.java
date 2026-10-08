@@ -111,6 +111,10 @@ public final class ModbusRtuManager {
                 notifyFailure(callback, pending.error);
             } else if (pending.response.isException()) {
                 notifyFailure(callback, "Modbus exception " + pending.response.exceptionCode);
+            } else if (ModbusFunction.isRead(request.function)
+                    && pending.response.registerValues.length != request.quantity) {
+                notifyFailure(callback, "Modbus response register count mismatch: expected "
+                        + request.quantity + ", received " + pending.response.registerValues.length);
             } else {
                 if (ModbusFunction.isRead(request.function)) {
                     ModbusRegisterValueStore.getInstance().putRange(request.startAddress,

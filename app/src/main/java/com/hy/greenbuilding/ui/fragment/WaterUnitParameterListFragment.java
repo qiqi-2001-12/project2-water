@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -23,10 +24,16 @@ import com.hy.greenbuilding.modbus.ModbusRequest;
 import com.hy.greenbuilding.modbus.ModbusResponse;
 import com.hy.greenbuilding.modbus.ModbusRtuManager;
 import com.hy.greenbuilding.modbus.WaterUnitRegisterMap;
+import com.hy.greenbuilding.modbus.WaterUnitSystemStatusDecoder;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /** 水机状态/设置参数的只读列表。 */
 public class WaterUnitParameterListFragment extends Fragment {
@@ -168,21 +175,36 @@ public class WaterUnitParameterListFragment extends Fragment {
         row.addView(textContainer, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
-        TextView valueView = new TextView(requireContext());
         WaterUnitRegisterMap.Register register = WaterUnitRegisterMap.resolve(code);
         Integer rawValue = register == null ? null
                 : ModbusRegisterValueStore.getInstance().get(register.address);
-        valueView.setText(rawValue == null ? (statusItem ? "--" : "待接入")
-                : String.valueOf(rawValue));
+        List<WriteOption> writeOptions = parseWriteOptions(name, detail);
+        NumericRange numericRange = parseNumericRange(detail);
+        boolean hasOptionControl = !statusItem && register != null && register.writable
+                && !writeOptions.isEmpty();
+        boolean canWrite = !statusItem && register != null && register.writable
+                && ModbusRtuManager.getInstance().isCommunicationEnabled();
+        TextView valueView = hasOptionControl ? new Button(requireContext())
+                : new TextView(requireContext());
+        valueView.setText(formatValue(rawValue, statusItem, code, name, writeOptions, numericRange));
         valueView.setTextColor(Color.parseColor("#A8907C"));
-        valueView.setTextSize(20);
+        valueView.setTextSize(28);
         valueView.setGravity(Gravity.CENTER);
-        row.addView(valueView, new LinearLayout.LayoutParams(dp(100),
+        row.addView(valueView, new LinearLayout.LayoutParams(dp(130),
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        if (!statusItem && register != null && register.writable) {
+        if (canWrite) {
             row.setClickable(true);
-            row.setOnClickListener(v -> showWriteDialog(register, name, rawValue));
+            if (hasOptionControl) {
+                View.OnClickListener listener = v -> showOptionWriteDialog(register, name, writeOptions);
+                row.setOnClickListener(listener);
+                valueView.setOnClickListener(listener);
+            } else {
+                row.setOnClickListener(v -> showNumericWriteDialog(register, name, rawValue, numericRange));
+            }
+        } else if (!statusItem && register != null && register.writable) {
+            row.setEnabled(false);
+            valueView.setEnabled(false);
         }
 
         LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
@@ -191,18 +213,136 @@ public class WaterUnitParameterListFragment extends Fragment {
         container.addView(row, rowParams);
     }
 
-    /** P 参数采用单寄存器原始值写入；倍率和工程单位在实体联调确认后统一补充。 */
-    private void showWriteDialog(WaterUnitRegisterMap.Register register, String name, Integer currentValue) {
-        if (!ModbusRtuManager.getInstance().isCommunicationEnabled()) {
-            Toast.makeText(requireContext(), "水机实体通讯未启用", Toast.LENGTH_SHORT).show();
+    private String formatValue(Integer rawValue, boolean statusItem, String code, String name,
+                               List<WriteOption> writeOptions, NumericRange numericRange) {
+        if (rawValue == null) {
+            return statusItem || writeOptions.isEmpty() ? "--" : "请选择";
+        }
+        if ("A01".equals(code)) {
+            return WaterUnitSystemStatusDecoder.decode(rawValue);
+        }
+        if (statusItem && isBinaryOutput(code)) {
+            if (rawValue == 0) {
+                return "关";
+            }
+            if (rawValue == 1) {
+                return "开";
+            }
+        }
+        if (statusItem && name.contains("开关")) {
+            return rawValue == 0 ? "关闭" : "开启";
+        }
+        for (WriteOption option : writeOptions) {
+            if (option.value == rawValue) {
+                return option.label;
+            }
+        }
+        return formatEngineeringValue(toDisplayValue(rawValue, numericRange, code, name), code, name);
+    }
+
+    private boolean isBinaryOutput(String code) {
+        if (code == null || !code.startsWith("Y")) {
+            return false;
+        }
+        try {
+            int number = Integer.parseInt(code.substring(1));
+            return number >= 0 && number <= 12;
+        } catch (NumberFormatException ignored) {
+            return false;
+        }
+    }
+
+    /** Explicit catalog options use labels; range values remain numeric input. */
+    private List<WriteOption> parseWriteOptions(String name, String detail) {
+        List<WriteOption> options = new ArrayList<>();
+        if (!detail.contains("/")) {
+            return options;
+        }
+        String[] optionTexts = detail.split("\\s*/\\s*");
+        for (String optionText : optionTexts) {
+            int separator = optionText.indexOf('-');
+            if (separator <= 0 || separator == optionText.length() - 1) {
+                return new ArrayList<>();
+            }
+            int value;
+            try {
+                value = Integer.parseInt(optionText.substring(0, separator).trim());
+            } catch (NumberFormatException exception) {
+                return new ArrayList<>();
+            }
+            String label = optionText.substring(separator + 1).trim();
+            if (name.contains("是否") && (value == 0 || value == 1)) {
+                label = value == 0 ? "否" : "是";
+            }
+            options.add(new WriteOption(value, label));
+        }
+        return options;
+    }
+
+    private NumericRange parseNumericRange(String detail) {
+        final String prefix = "范围：";
+        int prefixIndex = detail.indexOf(prefix);
+        if (prefixIndex < 0) {
+            return null;
+        }
+        String rangeText = detail.substring(prefixIndex + prefix.length());
+        int separator = rangeText.indexOf('～');
+        if (separator <= 0 || separator == rangeText.length() - 1) {
+            return null;
+        }
+        try {
+            int minimum = Integer.parseInt(rangeText.substring(0, separator).trim());
+            int maximumEnd = separator + 1;
+            while (maximumEnd < rangeText.length()
+                    && Character.isDigit(rangeText.charAt(maximumEnd))) {
+                maximumEnd++;
+            }
+            if (maximumEnd == separator + 1) {
+                return null;
+            }
+            int maximum = Integer.parseInt(rangeText.substring(separator + 1, maximumEnd));
+            return new NumericRange(minimum, maximum, rangeText);
+        } catch (NumberFormatException exception) {
+            return null;
+        }
+    }
+
+    private void showOptionWriteDialog(WaterUnitRegisterMap.Register register, String name,
+                                       List<WriteOption> options) {
+        if (!isCommunicationEnabled()) {
+            return;
+        }
+        String[] labels = new String[options.size()];
+        for (int index = 0; index < options.size(); index++) {
+            labels[index] = options.get(index).label;
+        }
+        new AlertDialog.Builder(requireContext())
+                .setTitle(name)
+                .setItems(labels, (dialog, which) -> {
+                    WriteOption option = options.get(which);
+                    writeRegister(register, option.value);
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+
+    /** Numeric engineering values retain direct input. */
+    private void showNumericWriteDialog(WaterUnitRegisterMap.Register register, String name,
+                                        Integer currentValue, NumericRange numericRange) {
+        if (!isCommunicationEnabled()) {
             return;
         }
 
         EditText input = new EditText(requireContext());
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        int inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED;
+        if (usesTenths(register.code, name)) {
+            inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
+        }
+        input.setInputType(inputType);
         input.setSingleLine(true);
         if (currentValue != null) {
-            input.setText(String.valueOf(currentValue));
+            input.setText(formatEngineeringValue(toDisplayValue(
+                    currentValue, numericRange, register.code, name), register.code, name));
             input.setSelection(input.length());
         }
         int padding = dp(24);
@@ -210,39 +350,83 @@ public class WaterUnitParameterListFragment extends Fragment {
 
         AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setTitle(name)
-                .setMessage("请输入 0 - 65535 的 Modbus 原始值")
                 .setView(input)
                 .setNegativeButton("取消", null)
-                .setPositiveButton("下一步", null)
+                .setPositiveButton("设置", null)
                 .create();
         dialog.setOnShowListener(ignored -> dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setOnClickListener(v -> confirmWrite(dialog, input, register, name)));
+                .setOnClickListener(v -> writeNumericValue(dialog, input, register, name, numericRange)));
         dialog.show();
     }
 
-    private void confirmWrite(AlertDialog inputDialog, EditText input,
-                              WaterUnitRegisterMap.Register register, String name) {
+    private boolean isCommunicationEnabled() {
+        return ModbusRtuManager.getInstance().isCommunicationEnabled();
+    }
+
+    private void writeNumericValue(AlertDialog inputDialog, EditText input,
+                                   WaterUnitRegisterMap.Register register, String name,
+                                   NumericRange numericRange) {
         String text = input.getText().toString().trim();
-        int value;
+        boolean useTenths = usesTenths(register.code, name);
+        BigDecimal engineeringValue;
+        int rawValue;
         try {
-            value = Integer.parseInt(text);
+            engineeringValue = new BigDecimal(text);
+            rawValue = useTenths ? engineeringValue.movePointRight(1).intValueExact()
+                    : engineeringValue.intValueExact();
         } catch (NumberFormatException exception) {
-            input.setError("请输入整数");
+            input.setError(useTenths ? "请输入最多一位小数" : "请输入整数");
+            return;
+        } catch (ArithmeticException exception) {
+            input.setError(useTenths ? "请输入最多一位小数" : "请输入整数");
             return;
         }
-        if (value < 0 || value > 0xFFFF) {
-            input.setError("允许范围为 0 - 65535");
+        if (numericRange != null
+                && (engineeringValue.compareTo(BigDecimal.valueOf(numericRange.minimum)) < 0
+                || engineeringValue.compareTo(BigDecimal.valueOf(numericRange.maximum)) > 0)) {
+            input.setError("允许范围：" + numericRange.text);
             return;
         }
-        new AlertDialog.Builder(requireContext())
-                .setTitle("确认写入")
-                .setMessage("确认将“" + name + "”写为原始值 " + value + "？")
-                .setNegativeButton("取消", null)
-                .setPositiveButton("确认写入", (dialog, which) -> {
-                    inputDialog.dismiss();
-                    writeRegister(register, value);
-                })
-                .show();
+        if (numericRange == null && (rawValue < 0 || rawValue > 0xFFFF)) {
+            input.setError("数值超出寄存器可写范围");
+            return;
+        }
+        inputDialog.dismiss();
+        writeRegister(register, numericRange != null && numericRange.minimum < 0
+                ? rawValue & 0xFFFF : rawValue);
+    }
+
+    private int toDisplayValue(int rawValue, NumericRange numericRange, String code, String name) {
+        boolean signedValue = (numericRange != null && numericRange.minimum < 0)
+                || usesTenths(code, name);
+        return signedValue && rawValue > 0x7FFF
+                ? rawValue - 0x10000 : rawValue;
+    }
+
+    private String formatEngineeringValue(int value, String code, String name) {
+        if (!usesTenths(code, name)) {
+            return String.valueOf(value);
+        }
+        if (isPressureValue(code, name)) {
+            return String.format(Locale.US, "%.1f", value / 10.0d);
+        }
+        if (value % 10 == 0) {
+            return String.valueOf(value / 10);
+        }
+        return String.format(Locale.US, "%.1f", value / 10.0d);
+    }
+
+    /** Temperature, superheat, and pressure values use a 0.1-unit register scale. */
+    private boolean usesTenths(String code, String name) {
+        return name.contains("温") || name.contains("过热度") || isPressureValue(code, name);
+    }
+
+    private boolean isPressureValue(String code, String name) {
+        if ("P152".equals(code) || "P153".equals(code)
+                || "P154".equals(code) || "P155".equals(code)) {
+            return true;
+        }
+        return name.contains("压力") && !name.contains("传感器");
     }
 
     private void writeRegister(WaterUnitRegisterMap.Register register, int value) {
@@ -255,8 +439,7 @@ public class WaterUnitParameterListFragment extends Fragment {
 
                     @Override
                     public void onFailure(String message) {
-                        requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(),
-                                "写入失败：" + message, Toast.LENGTH_LONG).show());
+                        // The setting remains unchanged until a later successful read refreshes it.
                     }
                 });
     }
@@ -273,13 +456,34 @@ public class WaterUnitParameterListFragment extends Fragment {
 
             @Override
             public void onFailure(String message) {
-                requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(),
-                        "写入已响应，但回读失败：" + message, Toast.LENGTH_LONG).show());
+                // Do not interrupt local configuration when the outdoor unit is absent.
             }
         });
     }
 
     private int dp(int value) {
         return Math.round(value * requireContext().getResources().getDisplayMetrics().density);
+    }
+
+    private static final class WriteOption {
+        final int value;
+        final String label;
+
+        WriteOption(int value, String label) {
+            this.value = value;
+            this.label = label;
+        }
+    }
+
+    private static final class NumericRange {
+        final int minimum;
+        final int maximum;
+        final String text;
+
+        NumericRange(int minimum, int maximum, String text) {
+            this.minimum = minimum;
+            this.maximum = maximum;
+            this.text = text;
+        }
     }
 }
