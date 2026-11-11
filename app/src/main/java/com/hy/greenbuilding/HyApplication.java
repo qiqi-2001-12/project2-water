@@ -162,4 +162,12 @@ public class HyApplication extends Application {
         // remove 方法会返回被删除的值
         return stateMap.remove(key);
     }
+
+    public static synchronized boolean hasState(int key) {
+        return stateMap.containsKey(key);
+    }
+
+    public static synchronized void removeState(int key) {
+        stateMap.remove(key);
+    }
 }

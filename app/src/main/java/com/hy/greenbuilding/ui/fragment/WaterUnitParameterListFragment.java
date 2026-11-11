@@ -136,6 +136,9 @@ public class WaterUnitParameterListFragment extends Fragment {
         String code = columns[0];
         String name = columns[2];
         String detail = columns.length > 3 ? columns[3] : "";
+        // Reserved setting entries remain in the catalog for protocol completeness, but do not
+        // bind a register value or expose a write action in the settings screen.
+        boolean reservedSetting = !statusItem && "保留".equals(name.trim());
 
         LinearLayout row = new LinearLayout(requireContext());
         row.setOrientation(LinearLayout.HORIZONTAL);
@@ -175,7 +178,8 @@ public class WaterUnitParameterListFragment extends Fragment {
         row.addView(textContainer, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
-        WaterUnitRegisterMap.Register register = WaterUnitRegisterMap.resolve(code);
+        WaterUnitRegisterMap.Register register = reservedSetting
+                ? null : WaterUnitRegisterMap.resolve(code);
         Integer rawValue = register == null ? null
                 : ModbusRegisterValueStore.getInstance().get(register.address);
         List<WriteOption> writeOptions = parseWriteOptions(name, detail);
@@ -186,7 +190,8 @@ public class WaterUnitParameterListFragment extends Fragment {
                 && ModbusRtuManager.getInstance().isCommunicationEnabled();
         TextView valueView = hasOptionControl ? new Button(requireContext())
                 : new TextView(requireContext());
-        valueView.setText(formatValue(rawValue, statusItem, code, name, writeOptions, numericRange));
+        valueView.setText(reservedSetting
+                ? "" : formatValue(rawValue, statusItem, code, name, writeOptions, numericRange));
         valueView.setTextColor(Color.parseColor("#A8907C"));
         valueView.setTextSize(28);
         valueView.setGravity(Gravity.CENTER);

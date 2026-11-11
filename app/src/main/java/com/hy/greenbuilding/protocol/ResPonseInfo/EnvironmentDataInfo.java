@@ -91,13 +91,18 @@ public class EnvironmentDataInfo {
         String roomJson = MySpUtil.getParam(mContext, MySpUtil.ROOM_DATA, new Gson().toJson(roomList)).toString();
         List<RoomInfo> saveRoomList = new Gson().fromJson(roomJson, new TypeToken<List<RoomInfo>>() {
         }.getType());
+        if (saveRoomList == null) {
+            saveRoomList = new ArrayList<>();
+        }
         AirQualityInfo qualityInfo= new AirQualityInfo();
         if(PublicUse.mJniFunCB != null){
             String tempJsonString = PublicUse.mJniFunCB.onGetDeviceTypeInfo(0, (1 << HYJniService.SUB_DEVICE_TYPE_ENV_DETECTOR));
-            qualityInfo = new Gson().fromJson(tempJsonString, AirQualityInfo.class);
+            AirQualityInfo gatewayQualityInfo = new Gson().fromJson(tempJsonString, AirQualityInfo.class);
+            if (gatewayQualityInfo != null) {
+                qualityInfo = gatewayQualityInfo;
+            }
         }
         for (int i = 0; i < list.size(); i++) {
-            RoomInfo roomInfo = new RoomInfo();
             RoomBytes roomBytes = new RoomBytes();
             byte[] roomData = list.get(i);
             if (roomData.length < 12) {
@@ -109,57 +114,50 @@ public class EnvironmentDataInfo {
             int co2 = ByteUtils.byteArrayToInt16(Arrays.copyOfRange(roomData, 6, 8));
             int formaldehyde = ByteUtils.byteArrayToInt16(Arrays.copyOfRange(roomData, 8, 10));
             int tvoc = ByteUtils.byteArrayToInt16(Arrays.copyOfRange(roomData, 10, 12));
-            if(saveRoomList.size() < 9){
+
+            // The saved list can contain custom rooms and is not guaranteed to be ordered by ID.
+            RoomInfo roomInfo = findRoomById(saveRoomList, i);
+            if (roomInfo == null) {
+                roomInfo = new RoomInfo();
                 roomInfo.setRoomId(i);
-                roomInfo.setTemp(new BigDecimal((float) temp / 10).setScale(0, BigDecimal.ROUND_DOWN).intValue());
                 roomInfo.setRoomName("房间" + (i + 1));
-                roomInfo.setPm(pm);
-                roomInfo.setCo2(co2);
-                roomInfo.setHumidity(humidity);
                 roomInfo.setAirValve("关");
-                roomInfo.setFormaldehyde(formaldehyde);
-                roomInfo.setTvoc(tvoc);
-
                 saveRoomList.add(roomInfo);
-            }else{
-                if (getRoomErrorBit()[(getRoomErrorBit().length - 1) - i] == 1) {
-                    roomBytes.setNotifyStatus((byte) 0x01);
-                } else {
-                    roomBytes.setNotifyStatus((byte) 0x00);
-                }
-                if(saveRoomList.get(i).getRoomId() == i){
-                    saveRoomList.get(i).setTemp(new BigDecimal((float) temp / 10).setScale(0, BigDecimal.ROUND_DOWN).intValue());
-                    saveRoomList.get(i).setPm(pm);
-                    saveRoomList.get(i).setCo2(co2);
-                    saveRoomList.get(i).setHumidity(humidity);
-                    roomInfo.setFormaldehyde(formaldehyde);
-                    roomInfo.setTvoc(tvoc);
-
-                    if(qualityInfo.getDevlist() != null && saveRoomList.get(i).getAirQualityId() != 0){
-                        for (int j =0;j< qualityInfo.getDevlist().size();j++){
-                            if(qualityInfo.getDevlist().get(j).getId() == saveRoomList.get(i).getAirQualityId()){
-                                saveRoomList.get(i).setTemp(qualityInfo.getDevlist().get(j).getTemp());
-                                saveRoomList.get(i).setPm(qualityInfo.getDevlist().get(j).getPM25());
-                                saveRoomList.get(i).setCo2(qualityInfo.getDevlist().get(j).getCO2());
-                                saveRoomList.get(i).setHumidity(qualityInfo.getDevlist().get(j).getHumi());
-                                roomBytes.setNotifyStatus((byte) 0x01);
-                                saveRoomList.get(i).setFormaldehyde(qualityInfo.getDevlist().get(j).getFormaldehyde());
-                                saveRoomList.get(i).setTvoc(qualityInfo.getDevlist().get(j).getTvoc());
-                            }
-                        }
-                    }
-                }
-                roomBytes.setRoomTemp((byte) saveRoomList.get(i).getTemp());
-                roomBytes.setRoomHumidity((byte) saveRoomList.get(i).getHumidity());
-                roomBytes.setRoomCo2(ByteUtils.int16ToByteArray(saveRoomList.get(i).getCo2()));
-                roomBytes.setRoomPm(ByteUtils.int16ToByteArray(saveRoomList.get(i).getPm()));
-
-                roomBytes.setRoomFormaldehyde(ByteUtils.int16ToByteArray(saveRoomList.get(i).getFormaldehyde()));
-                roomBytes.setRoomTvoc(ByteUtils.int16ToByteArray(saveRoomList.get(i).getTvoc()));
-                roomBytes.setFanSwitch((byte) 0x00);
-                roomBytesList.add(roomBytes);
             }
 
+            roomInfo.setTemp(new BigDecimal((float) temp / 10)
+                    .setScale(0, BigDecimal.ROUND_DOWN).intValue());
+            roomInfo.setPm(pm);
+            roomInfo.setCo2(co2);
+            roomInfo.setHumidity(humidity);
+            roomInfo.setFormaldehyde(formaldehyde);
+            roomInfo.setTvoc(tvoc);
+
+            byte[] errorBits = getRoomErrorBit();
+            roomBytes.setNotifyStatus(errorBits[(errorBits.length - 1) - i] == 1
+                    ? (byte) 0x01 : (byte) 0x00);
+            if(qualityInfo.getDevlist() != null && roomInfo.getAirQualityId() != 0){
+                for (int j =0;j< qualityInfo.getDevlist().size();j++){
+                    if(qualityInfo.getDevlist().get(j).getId() == roomInfo.getAirQualityId()){
+                        roomInfo.setTemp(qualityInfo.getDevlist().get(j).getTemp());
+                        roomInfo.setPm(qualityInfo.getDevlist().get(j).getPM25());
+                        roomInfo.setCo2(qualityInfo.getDevlist().get(j).getCO2());
+                        roomInfo.setHumidity(qualityInfo.getDevlist().get(j).getHumi());
+                        roomBytes.setNotifyStatus((byte) 0x01);
+                        roomInfo.setFormaldehyde(qualityInfo.getDevlist().get(j).getFormaldehyde());
+                        roomInfo.setTvoc(qualityInfo.getDevlist().get(j).getTvoc());
+                        break;
+                    }
+                }
+            }
+            roomBytes.setRoomTemp((byte) roomInfo.getTemp());
+            roomBytes.setRoomHumidity((byte) roomInfo.getHumidity());
+            roomBytes.setRoomCo2(ByteUtils.int16ToByteArray(roomInfo.getCo2()));
+            roomBytes.setRoomPm(ByteUtils.int16ToByteArray(roomInfo.getPm()));
+            roomBytes.setRoomFormaldehyde(ByteUtils.int16ToByteArray(roomInfo.getFormaldehyde()));
+            roomBytes.setRoomTvoc(ByteUtils.int16ToByteArray(roomInfo.getTvoc()));
+            roomBytes.setFanSwitch((byte) 0x00);
+            roomBytesList.add(roomBytes);
         }
         if (roomBytesList != null && roomBytesList.size() > 0) {
             HDTopic hdTopic = MqttUploadManager.getInstance().getmHDTopic();
@@ -170,12 +168,24 @@ public class EnvironmentDataInfo {
         return saveRoomList;
     }
 
+    private RoomInfo findRoomById(List<RoomInfo> rooms, int roomId) {
+        for (RoomInfo room : rooms) {
+            if (room.getRoomId() == roomId) {
+                return room;
+            }
+        }
+        return null;
+    }
+
     /**
      * 空气质量数据下发主控板
      */
     private void sendQuality(List<RoomInfo> saveRoomList,AirQualityInfo qualityInfo){
+        if (qualityInfo == null || qualityInfo.getDevlist() == null) {
+            return;
+        }
         for(int i = 0;i<saveRoomList.size();i++){
-            if(qualityInfo.getDevlist() != null && saveRoomList.get(i).getAirQualityId() != 0){
+            if(saveRoomList.get(i).getAirQualityId() != 0){
                 for (int j =0;j< qualityInfo.getDevlist().size();j++){
                     if(qualityInfo.getDevlist().get(j).getId() == saveRoomList.get(i).getAirQualityId()){
                         EnvironmentCommand command = new EnvironmentCommand(FunctionObject.SET_AIR_QUALITY);

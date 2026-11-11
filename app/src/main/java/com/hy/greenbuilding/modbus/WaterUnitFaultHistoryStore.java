@@ -95,6 +95,17 @@ public final class WaterUnitFaultHistoryStore {
         return result;
     }
 
+    /** Clears persisted occurrences while keeping the current active-fault baseline. */
+    public synchronized void clear() {
+        history.clear();
+        if (preferences != null) {
+            preferences.edit()
+                    .remove(KEY_HISTORY)
+                    .putStringSet(KEY_ACTIVE_KEYS, new HashSet<>(activeKeys))
+                    .apply();
+        }
+    }
+
     public synchronized Long getActiveStartedAt(String key) {
         if (!activeKeys.contains(key)) {
             return null;

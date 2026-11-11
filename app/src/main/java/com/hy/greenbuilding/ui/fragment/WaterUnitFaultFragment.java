@@ -172,8 +172,13 @@ public class WaterUnitFaultFragment extends Fragment {
                 .setTitle("故障复位")
                 .setMessage("将向外机发送故障复位指令。")
                 .setNegativeButton("取消", null)
-                .setPositiveButton("确认复位", (dialog, which) -> Toast.makeText(requireContext(),
-                        "未配置故障复位寄存器，未发送复位指令", Toast.LENGTH_SHORT).show())
+                .setPositiveButton("确认复位", (dialog, which) -> {
+                    WaterUnitFaultHistoryStore.getInstance().clear();
+                    showingHistory = false;
+                    renderMode();
+                    Toast.makeText(requireContext(),
+                            "历史故障已清除，当前故障将按实时状态显示", Toast.LENGTH_SHORT).show();
+                })
                 .show();
     }
 

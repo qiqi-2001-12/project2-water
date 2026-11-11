@@ -51,6 +51,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class SpDataProcessor {
     private static final SpDataProcessor ourInstance = new SpDataProcessor();
+    /* The water-unit parser needs a long idle gap to discard transparent custom-protocol data. */
+    private static final long BUS_SILENT_INTERVAL_MS = 300L;
+    private static final long BUS_QUIET_WAIT_TIMEOUT_MS = 1000L;
+    private static final long CUSTOM_RESPONSE_TIMEOUT_MS = 300L;
+    private static final long HIGH_PRIORITY_RESPONSE_TIMEOUT_MS = 500L;
     private SerialHelper mSerialHelper;
     private byte[] mResponseBuffer = new byte[0];
     private static final int MAX_FRAME_LENGTH = 256;
@@ -74,6 +79,7 @@ public class SpDataProcessor {
 
             @Override
             protected void onDataReceived(byte[] paramComBean) {
+                lastSerialReceiveAt = SystemClock.elapsedRealtime();
                 // 全部抛到单工作线程，不阻塞主线程
                 mSerialHandler.post(() -> {
                     try {
@@ -106,12 +112,17 @@ public class SpDataProcessor {
                             }
                             int currentNum = ((oneFrame[3] & 0xFF) << 8) | (oneFrame[4] & 0xFF);
                             String serialNumber = Hex.bytesToHexString(new byte[]{oneFrame[5], oneFrame[6]});
-                            if (HyApplication.getAndRemoveState(currentNum) != null || serialNumber.equals("0005")) {
+                            boolean matchesRequest = HyApplication.hasState(currentNum);
+                            if (matchesRequest || serialNumber.equals("0005")) {
 //                                Log.e("TAG", "检查到数据，开始 CRC 校验");
                                 short crcCalc = crcVerify(oneFrame, oneFrame.length - 2);
                                 short crcStored = (short) (((oneFrame[frameTotalLen - 2] & 0xFF) << 8) | (oneFrame[frameTotalLen - 1] & 0xFF));
 
                                 if (crcCalc == crcStored) {
+                                    if (matchesRequest) {
+                                        HyApplication.removeState(currentNum);
+                                        completeCustomTransaction(currentNum);
+                                    }
                                     // --- 校验通过：解析并跳过整帧 ---
                                     SpResponse spResponse = new SpResponse(oneFrame);
                                     processSpResponse(spResponse);
@@ -608,6 +619,10 @@ public class SpDataProcessor {
     private final Object sendLock = new Object();
     /** 自定义协议与 Modbus 共用主机串口时，Modbus 请求-响应期间独占总线。 */
     private final ReentrantLock serialBusLock = new ReentrantLock(true);
+    private final Object customResponseLock = new Object();
+    private volatile long lastSerialReceiveAt;
+    private int pendingCustomSerial = -1;
+    private boolean customResponseReceived;
 
     /**
      * 发送串口命令
@@ -656,26 +671,29 @@ public class SpDataProcessor {
     private void processCommand(SpCommand spCommand) {
         serialBusLock.lock();
         try {
-            synchronized (sendLock) {
-                if (mSerialHelper.isOpen() && spCommand != null) {
-                    if (!isUpdate) {
+            if (!mSerialHelper.isOpen() || spCommand == null || isUpdate) {
+                return;
+            }
+            if (!waitForBusQuiet(BUS_QUIET_WAIT_TIMEOUT_MS)) {
+                return;
+            }
+            byte[] frame = spCommand.getBytes();
+            int serial = getCustomFrameSerial(frame);
+            prepareCustomTransaction(serial);
+            try {
+                synchronized (sendLock) {
                     // --- 添加这行日志 ---
 //                    Log.i("QueueTest", ">>> 实际执行发送，优先级为: " + spCommand.priority);
 //                    Log.d("SpDataProcessor", "正在发送指令: " + Hex.bytesToHexString(spCommand.getBytes()) + " | 优先级: " + spCommand.priority+ " | 功能id: " + spCommand.functionId);
-
-                        mSerialHelper.send(spCommand.getBytes());
-                        if (spCommand.priority < 5) {
-                        // 高优先级指令（如恢复出厂、OTA）通常需要更多处理时间
-                            SystemClock.sleep(120);
-                        } else {
-                        // 普通指令间隔
-                            SystemClock.sleep(50);
-                        }
-                    }
-//                    SystemClock.sleep(50);
-//                    SystemClock.sleep(100);
+                    mSerialHelper.send(frame);
                 }
+                waitForCustomResponse(serial, spCommand.priority < 5
+                        ? HIGH_PRIORITY_RESPONSE_TIMEOUT_MS : CUSTOM_RESPONSE_TIMEOUT_MS);
+            } finally {
+                HyApplication.removeState(serial);
+                clearCustomTransaction(serial);
             }
+            waitForBusQuiet(BUS_QUIET_WAIT_TIMEOUT_MS);
         } finally {
             serialBusLock.unlock();
         }
@@ -685,7 +703,14 @@ public class SpDataProcessor {
     /** 为水机 Modbus 的一次请求-响应事务独占主机串口。 */
     public boolean beginModbusTransaction(long waitTimeoutMs) {
         try {
-            return serialBusLock.tryLock(waitTimeoutMs, TimeUnit.MILLISECONDS);
+            if (!serialBusLock.tryLock(waitTimeoutMs, TimeUnit.MILLISECONDS)) {
+                return false;
+            }
+            if (waitForBusQuiet(BUS_QUIET_WAIT_TIMEOUT_MS)) {
+                return true;
+            }
+            serialBusLock.unlock();
+            return false;
         } catch (InterruptedException interruptedException) {
             Thread.currentThread().interrupt();
             return false;
@@ -708,7 +733,79 @@ public class SpDataProcessor {
 
     public void endModbusTransaction() {
         if (serialBusLock.isHeldByCurrentThread()) {
+            waitForBusQuiet(BUS_QUIET_WAIT_TIMEOUT_MS);
             serialBusLock.unlock();
+        }
+    }
+
+    private boolean waitForBusQuiet(long timeoutMs) {
+        long deadline = SystemClock.elapsedRealtime() + timeoutMs;
+        while (true) {
+            long now = SystemClock.elapsedRealtime();
+            long quietFor = now - lastSerialReceiveAt;
+            if (lastSerialReceiveAt == 0L || quietFor >= BUS_SILENT_INTERVAL_MS) {
+                return true;
+            }
+            long remaining = deadline - now;
+            if (remaining <= 0L) {
+                return false;
+            }
+            SystemClock.sleep(Math.min(BUS_SILENT_INTERVAL_MS - quietFor, remaining));
+        }
+    }
+
+    private static int getCustomFrameSerial(byte[] frame) {
+        if (frame == null || frame.length < 5
+                || frame[0] != (byte) 0xAA || frame[1] != (byte) 0x55) {
+            return -1;
+        }
+        return ((frame[3] & 0xFF) << 8) | (frame[4] & 0xFF);
+    }
+
+    private void prepareCustomTransaction(int serial) {
+        synchronized (customResponseLock) {
+            pendingCustomSerial = serial;
+            customResponseReceived = false;
+        }
+    }
+
+    private void completeCustomTransaction(int serial) {
+        synchronized (customResponseLock) {
+            if (pendingCustomSerial == serial) {
+                customResponseReceived = true;
+                customResponseLock.notifyAll();
+            }
+        }
+    }
+
+    private void waitForCustomResponse(int serial, long timeoutMs) {
+        if (serial < 0) {
+            SystemClock.sleep(BUS_SILENT_INTERVAL_MS);
+            return;
+        }
+        long deadline = SystemClock.elapsedRealtime() + timeoutMs;
+        synchronized (customResponseLock) {
+            while (pendingCustomSerial == serial && !customResponseReceived) {
+                long remaining = deadline - SystemClock.elapsedRealtime();
+                if (remaining <= 0L) {
+                    break;
+                }
+                try {
+                    customResponseLock.wait(remaining);
+                } catch (InterruptedException interruptedException) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void clearCustomTransaction(int serial) {
+        synchronized (customResponseLock) {
+            if (pendingCustomSerial == serial) {
+                pendingCustomSerial = -1;
+                customResponseReceived = false;
+            }
         }
     }
 
@@ -719,11 +816,21 @@ public class SpDataProcessor {
         }
         serialBusLock.lock();
         try {
-            synchronized (sendLock) {
-                if (mSerialHelper.isOpen()) {
+            if (!mSerialHelper.isOpen() || !waitForBusQuiet(BUS_QUIET_WAIT_TIMEOUT_MS)) {
+                return;
+            }
+            int serial = getCustomFrameSerial(frame);
+            prepareCustomTransaction(serial);
+            try {
+                synchronized (sendLock) {
                     mSerialHelper.send(frame);
                 }
+                waitForCustomResponse(serial, HIGH_PRIORITY_RESPONSE_TIMEOUT_MS);
+            } finally {
+                HyApplication.removeState(serial);
+                clearCustomTransaction(serial);
             }
+            waitForBusQuiet(BUS_QUIET_WAIT_TIMEOUT_MS);
         } finally {
             serialBusLock.unlock();
         }
