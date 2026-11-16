@@ -85,11 +85,9 @@ public class ManagerActivity extends BaseActivity {
     private static final int TERM_LOW_TEMP = 1;
     private static final int TERM_PV = 2;
     private static final int TERM_UP_TEMP = 3;
-    private static final int TERM_NO_POWER_CONTROL = 4;
     private String mLowTemp = "低温增焓";
     private String mPV = "光伏";
     private String mUpTemp = "升温除湿";
-    private String mNoPowerControl = "无动力分控系统";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,7 +111,7 @@ public class ManagerActivity extends BaseActivity {
         } else if (type == TERM_PV) {
             mTitleSpinner.setText(mPV);
         } else if (type == TERM_UP_TEMP) {
-            mTitleSpinner.setText(termUiType == TERM_NO_POWER_CONTROL ? mNoPowerControl : mUpTemp);
+            mTitleSpinner.setText(mUpTemp);
         }
     }
 
@@ -258,13 +256,6 @@ public class ManagerActivity extends BaseActivity {
                         termType = TERM_UP_TEMP;
                         termUiType = TERM_UP_TEMP;
                         SpDataProcessor.getInstance().send(controlCommand);
-                    } else if (mTitleSpinner.getText().equals(mNoPowerControl)) {
-                        ControlCommand controlCommand = new ControlCommand(FunctionObject.SET_OUTDOOR_TYPE);
-                        byte[] sendData = {(byte) 0x00, (byte) 0x03};
-                        controlCommand.setData(sendData);
-                        termType = TERM_UP_TEMP;
-                        termUiType = TERM_NO_POWER_CONTROL;
-                        SpDataProcessor.getInstance().send(controlCommand);
                     }
 
                 }
@@ -289,18 +280,13 @@ public class ManagerActivity extends BaseActivity {
         testData.add(mPV);
         testData.add(mLowTemp);
         testData.add(mUpTemp);
-        testData.add(mNoPowerControl);
     }
 
     private boolean isUpTempMode(String value) {
-        return mUpTemp.equals(value) || mNoPowerControl.equals(value);
+        return mUpTemp.equals(value);
     }
 
     private int getSavedTermUiType(int outTermType) {
-        int savedType = (int) MySpUtil.getParam(ManagerActivity.this, MySpUtil.OUT_TERM_UI_TYPE, outTermType);
-        if (outTermType == TERM_UP_TEMP && savedType == TERM_NO_POWER_CONTROL) {
-            return TERM_NO_POWER_CONTROL;
-        }
         return outTermType;
     }
 

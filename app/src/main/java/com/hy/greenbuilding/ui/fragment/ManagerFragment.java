@@ -129,11 +129,9 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
     private static final int TERM_LOW_TEMP = 1;
     private static final int TERM_PV = 2;
     private static final int TERM_UP_TEMP = 3;
-    private static final int TERM_NO_POWER_CONTROL = 4;
     private String mLowTemp = "低温增焓";
     private String mPV = "光伏";
     private String mUpTemp = "升温除湿";
-    private String mNoPowerControl = "无动力分控系统";
 
     @Nullable
     @Override
@@ -159,7 +157,7 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
         } else if (type == TERM_PV) {
             mTitleSpinner.setText(mPV);
         } else if (type == TERM_UP_TEMP) {
-            mTitleSpinner.setText(termUiType == TERM_NO_POWER_CONTROL ? mNoPowerControl : mUpTemp);
+            mTitleSpinner.setText(mUpTemp);
         }
         set_power_switch.setOnCheckedChangeListener(this);
 
@@ -426,10 +424,6 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
                         sendData = new byte[]{(byte) 0x00, (byte) 0x03};
                         termType = TERM_UP_TEMP;
                         termUiType = TERM_UP_TEMP;
-                    } else if (mTitleSpinner.getText().equals(mNoPowerControl)) {
-                        sendData = new byte[]{(byte) 0x00, (byte) 0x03};
-                        termType = TERM_UP_TEMP;
-                        termUiType = TERM_NO_POWER_CONTROL;
                     }
 
                     controlCommand.setData(sendData);
@@ -458,19 +452,14 @@ public class ManagerFragment extends Fragment implements CompoundButton.OnChecke
         testData.add(mPV);
         testData.add(mLowTemp);
         testData.add(mUpTemp);
-        testData.add(mNoPowerControl);
     }
 
     private boolean isUpTempMode(String value) {
-        return mUpTemp.equals(value) || mNoPowerControl.equals(value);
+        return mUpTemp.equals(value);
     }
 
     private int getSavedTermUiType(int outTermType) {
         if (getContext() == null) return outTermType;
-        int savedType = (int) MySpUtil.getParam(getContext(), MySpUtil.OUT_TERM_UI_TYPE, outTermType);
-        if (outTermType == TERM_UP_TEMP && savedType == TERM_NO_POWER_CONTROL) {
-            return TERM_NO_POWER_CONTROL;
-        }
         return outTermType;
     }
 
