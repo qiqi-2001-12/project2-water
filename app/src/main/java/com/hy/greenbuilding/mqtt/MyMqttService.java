@@ -75,9 +75,9 @@ public class MyMqttService extends Service {
     private static IGetMessageCallBack IGetMessageCallBack;
     private static Context mContext;
     //ota服务器
-    private static String host = "tcp://8.129.88.64:1883";
-    private static String userName = "test02";
-    private static String passWord = "123456";
+    private static String host = "tcp://app.lowcarn.com:1883";
+    private static String userName = "test";
+    private static String passWord = "test";
     private static MqttClient client;
     private static MqttConnectOptions conOpt;
 

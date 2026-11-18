@@ -41,7 +41,7 @@ public class ElectricityMeterInfo {
         byte[] bytes = Arrays.copyOfRange(electricityData, 0, 4);
         int total = ByteUtils.byteArrayToInt(bytes, 0, bytes.length);
         heTopic.setTotalElectric(total);
-        return new BigDecimal((float) total / 10).setScale(2, BigDecimal.ROUND_DOWN);
+        return BigDecimal.valueOf(total, 1);
     }
 
     /**

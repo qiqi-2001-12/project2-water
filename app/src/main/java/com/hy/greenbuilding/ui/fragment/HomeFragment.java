@@ -49,6 +49,7 @@ import com.hwellyi.smarthome.MainGatewayActivity;
 import com.hwellyi.smarthome.PublicUse;
 import com.hy.greenbuilding.HyApplication;
 import com.hy.greenbuilding.R;
+import com.hy.greenbuilding.config.ErrorDefine;
 import com.hy.greenbuilding.config.SaveAddress;
 import com.hy.greenbuilding.config.SaveControlInfo;
 import com.hy.greenbuilding.config.SaveFilterScreen;
@@ -883,6 +884,7 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
             sendManualCommand(false);
             sendWindCommand((byte) 0x00, false);
             sendCircleCommand((byte) 0x02, false);
+            resetFanUiStatus();
             mCloseTv.setSelected(false);
             closeImage.setSelected(false);
             EventBus.getDefault().post(new TempSwitchUpdateEvent(false));
@@ -1000,6 +1002,51 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
      * 新风type(0x00)
      * 排风type(0x01)
      */
+    private void resetFanUiStatus() {
+        mWindSwitch.setSelected(false);
+        tvSetWindSwitch.setText("\u5173");
+        mCircleSwitch.setSelected(false);
+        tvSetCircleSwitch.setText("\u5173");
+        updateWindPopupStatus(0);
+        updateCirclePopupStatus(0);
+    }
+
+    private void updateWindPopupStatus() {
+        updateWindPopupStatus(windStatus);
+    }
+
+    private void updateWindPopupStatus(int status) {
+        if (mWindSmall == null || mWindMiddle == null || mWindHigh == null || btWindNo == null) {
+            return;
+        }
+        mWindSmall.setChecked(status == 1);
+        mWindMiddle.setChecked(status == 2);
+        mWindHigh.setChecked(status == 3);
+        btWindNo.setChecked(status == 0);
+        mWindSmall.setSelected(status == 1);
+        mWindMiddle.setSelected(status == 2);
+        mWindHigh.setSelected(status == 3);
+        btWindNo.setSelected(status == 0);
+    }
+
+    private void updateCirclePopupStatus() {
+        updateCirclePopupStatus(circleStatus);
+    }
+
+    private void updateCirclePopupStatus(int status) {
+        if (mCircleSmall == null || mCircleMiddle == null || mCircleHigh == null || btCircleNo == null) {
+            return;
+        }
+        mCircleSmall.setChecked(status == 1);
+        mCircleMiddle.setChecked(status == 2);
+        mCircleHigh.setChecked(status == 3);
+        btCircleNo.setChecked(status == 0);
+        mCircleSmall.setSelected(status == 1);
+        mCircleMiddle.setSelected(status == 2);
+        mCircleHigh.setSelected(status == 3);
+        btCircleNo.setSelected(status == 0);
+    }
+
     private void sendWindCommand(byte type, boolean isOpen) {
         FanCommand fanCommand = new FanCommand(FunctionObject.SET_SPEED);
         if (isOpen) {
@@ -1013,11 +1060,11 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
                 fanCommand.setData(sendData);
             } else if (windStatus == 3) {
                 byte[] sendData = {type, (byte) 0x03};
-                hdTopic.setWindStatus((byte) 0x02);
+                hdTopic.setWindStatus((byte) 0x03);
                 fanCommand.setData(sendData);
             } else {
                 byte[] sendData = {type, (byte) 0x00};
-                hdTopic.setWindStatus((byte) 0x03);
+                hdTopic.setWindStatus((byte) 0x00);
                 fanCommand.setData(sendData);
             }
         } else {
@@ -1054,7 +1101,7 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
             } else {
                 byte[] sendData = {type, (byte) 0x00};
                 fanCommand.setData(sendData);
-                hdTopic.setCircleStatus((byte) 0x03);
+                hdTopic.setCircleStatus((byte) 0x00);
             }
         } else {
             byte[] sendData = {type, (byte) 0x00};
@@ -1253,13 +1300,10 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
             ToastUtil.showToast(getActivity(), "请先开机");
             return;
         }
-//        if (TimingUtils.timeValueIsNull(getActivity()) && !isTiming) {
-//            ToastUtil.showToast(getActivity(), "请先设置时间段！");
-////            Intent intent = new Intent(getActivity(), SettingActivity.class);
-////            intent.putExtra("timing", "1");
-////            startActivity(intent);
-//            return;
-//        }
+        if (TimingUtils.timeValueIsNull(getActivity())) {
+            ToastUtil.showToast(getActivity(), "\u8bf7\u5148\u8bbe\u7f6e\u65f6\u95f4\u6bb5\uff01");
+            return;
+        }
         dialogFragment = SettingTimeSetDialogFragment.newInstance(isTiming);
         dialogFragment.setTargetFragment(this, 0);
         dialogFragment.show(getActivity().getSupportFragmentManager(), "TimingSetDialog");
@@ -2821,7 +2865,18 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UpTempStatusInfo info) {
-        //info.uploadData();
+        if (info == null) {
+            return;
+        }
+        boolean hasError = false;
+        for (String errorKey : ErrorDefine.Up_temp_Error) {
+            Object errorValue = info.getDataMap().get(errorKey);
+            if (errorValue != null && !"[]".equals(errorValue.toString().trim())) {
+                hasError = true;
+                break;
+            }
+        }
+        outTermError.setVisibility(hasError ? View.VISIBLE : View.GONE);
     }
 
     private boolean isDefrost;
@@ -3247,31 +3302,22 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
 
     //更新排风机状态
     private void updateWindFanStatus(int fanStatus) {
-        if (fanStatus == 0) {
-            if (mWindSwitch.isSelected()) {
-                mWindSwitch.setSelected(false);
-                tvSetWindSwitch.setText("关");
-            }
-            windStatus = 0;
-            hdTopic.setWindStatus((byte) 0x00);
-        } else if (fanStatus == 1) {
-            mWindSwitch.setSelected(true);
-            windStatus = 1;
-            hdTopic.setWindStatus((byte) 0x01);
-            tvSetWindSwitch.setText("低");
-
-        } else if (fanStatus == 2) {
-            mWindSwitch.setSelected(true);
-            windStatus = 2;
-            hdTopic.setWindStatus((byte) 0x02);
-            tvSetWindSwitch.setText("中");
-        } else if (fanStatus == 3) {
-            mWindSwitch.setSelected(true);
-            windStatus = 3;
-            hdTopic.setWindStatus((byte) 0x03);
-            tvSetWindSwitch.setText("高");
+        if (fanStatus < 0 || fanStatus > 3) {
+            return;
         }
-
+        windStatus = fanStatus;
+        mWindSwitch.setSelected(fanStatus != 0);
+        if (fanStatus == 0) {
+            tvSetWindSwitch.setText("\u5173");
+        } else if (fanStatus == 1) {
+            tvSetWindSwitch.setText("\u4f4e");
+        } else if (fanStatus == 2) {
+            tvSetWindSwitch.setText("\u4e2d");
+        } else {
+            tvSetWindSwitch.setText("\u9ad8");
+        }
+        hdTopic.setWindStatus((byte) fanStatus);
+        updateWindPopupStatus();
 
         if (mCloseTv.isSelected() || closeImage.isSelected()) {
             MySpUtil.setParam(getActivity(), MySpUtil.WIND_STATUS, fanStatus);
@@ -3281,27 +3327,23 @@ public class HomeFragment extends Fragment implements IGetMessageCallBack, Setti
     //更新循环风状态
     private void updateCircleFanStatus(int fanStatus) {
         Log.e("TAG", "sendCircleCommand: " + fanStatus);
-        if (fanStatus == 0) {
-            circleStatus = 0;
-            mCircleSwitch.setSelected(false);
-            hdTopic.setCircleStatus((byte) 0x00);
-            tvSetCircleSwitch.setText("关");
-        } else if (fanStatus == 1) {
-            mCircleSwitch.setSelected(true);
-            circleStatus = 1;
-            hdTopic.setCircleStatus((byte) 0x01);
-            tvSetCircleSwitch.setText("低");
-        } else if (fanStatus == 2) {
-            mCircleSwitch.setSelected(true);
-            circleStatus = 2;
-            hdTopic.setCircleStatus((byte) 0x02);
-            tvSetCircleSwitch.setText("中");
-        } else if (fanStatus == 3) {
-            mCircleSwitch.setSelected(true);
-            circleStatus = 3;
-            hdTopic.setCircleStatus((byte) 0x03);
-            tvSetCircleSwitch.setText("高");
+        if (fanStatus < 0 || fanStatus > 3) {
+            return;
         }
+        circleStatus = fanStatus;
+        mCircleSwitch.setSelected(fanStatus != 0);
+        if (fanStatus == 0) {
+            tvSetCircleSwitch.setText("\u5173");
+        } else if (fanStatus == 1) {
+            tvSetCircleSwitch.setText("\u4f4e");
+        } else if (fanStatus == 2) {
+            tvSetCircleSwitch.setText("\u4e2d");
+        } else {
+            tvSetCircleSwitch.setText("\u9ad8");
+        }
+        hdTopic.setCircleStatus((byte) fanStatus);
+        updateCirclePopupStatus();
+
         if (mCloseTv.isSelected() || closeImage.isSelected()) {
             MySpUtil.setParam(getActivity(), MySpUtil.CIRCLE_STATUS, circleStatus);
         }

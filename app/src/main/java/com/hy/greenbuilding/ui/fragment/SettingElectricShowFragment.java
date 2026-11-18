@@ -77,7 +77,7 @@ public class SettingElectricShowFragment extends BaseDialogFragment {
 
     public void updateElectic(ElectricityMeterInfo info){
         if (info != null) {
-            mTotalElectric.setText(info.getTotalElectricity().doubleValue() + "");
+            mTotalElectric.setText(info.getTotalElectricity().toPlainString());
             mPower.setText(info.getPower().doubleValue() + "");
             mElectricView.setText(info.getElectric().doubleValue() + "");
             mVoltageView.setText(info.getVoltage().doubleValue() + "");

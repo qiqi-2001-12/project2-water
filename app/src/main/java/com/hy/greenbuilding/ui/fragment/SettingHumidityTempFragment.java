@@ -308,6 +308,10 @@ public class SettingHumidityTempFragment extends Fragment {
         return String.valueOf(clamp(value, DEFAULT_TEMP_MIN, DEFAULT_TEMP_MAX));
     }
 
+    private boolean isSystemOn() {
+        return (boolean) MySpUtil.getParam(getActivity(), MySpUtil.CLOSE_STATUS, true);
+    }
+
     private int parseInt(String value, int fallback) {
         if (TextUtils.isEmpty(value)) {
             return fallback;
@@ -381,6 +385,10 @@ public class SettingHumidityTempFragment extends Fragment {
 
     @OnClick({R.id.bt_setTemp})
     public void onTempClick(View view) {
+        if (!isSystemOn()) {
+            ToastUtil.showToast(getActivity(), "请先开机");
+            return;
+        }
         String tempMax = etTempMax.getText().toString();
         String tempMin = etTempMin.getText().toString();
         etTempMax.clearFocus();
@@ -423,6 +431,13 @@ public class SettingHumidityTempFragment extends Fragment {
 
     @OnClick({R.id.tv_min_minus, R.id.tv_min_plus, R.id.tv_max_minus, R.id.tv_max_plus})
     public void onValueControlClick(View view) {
+        if (!isSystemOn()) {
+            if (view.getId() == R.id.tv_min_minus || view.getId() == R.id.tv_min_plus
+                    || view.getId() == R.id.tv_max_minus || view.getId() == R.id.tv_max_plus) {
+                ToastUtil.showToast(getActivity(), "请先开机");
+            }
+            return;
+        }
         String tempMax = etTempMax.getText().toString();
         String tempMin = etTempMin.getText().toString();
         int maxTemp = parseInt(tempMax, DEFAULT_TEMP_MAX);
